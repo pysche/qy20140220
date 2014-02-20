@@ -11,7 +11,7 @@
       	'controller' => 'welcome',
       	'action' => 'index',
       	'module' => $this->MODULE
-      ));?>" class="navbar-brand">WeShop</a>
+      ));?>" class="navbar-brand"><?php echo Bc_Config::appConfig()->app_name;?></a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" data-role='top_menu'>

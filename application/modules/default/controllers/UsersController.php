@@ -1,6 +1,6 @@
 <?php
 
-class Weshop_UsersController extends Bc_Controller_Action_Weshop {
+class UsersController extends Bc_Controller_Action_Weshop {
 	
 	public function init() {
 		parent::init();
@@ -13,7 +13,7 @@ class Weshop_UsersController extends Bc_Controller_Action_Weshop {
 		$username = trim($this->getRequest()->getParam('Username'));
 		$id = (int)$this->getRequest()->getParam('id');
 		
-		if ($tUser->exists($username, $this->siteId, $id)) {
+		if ($tUser->exists($username, $id)) {
 			$this->view->Errormsg('该用户已存在，请更换一个用户名');
 		}
 		
@@ -28,7 +28,7 @@ class Weshop_UsersController extends Bc_Controller_Action_Weshop {
 		$tUser = &Bc_Db::t('users');
 		$username = trim($this->getRequest()->getParam('Username'));
 		
-		if ($tUser->exists($username, $this->siteId)) {
+		if ($tUser->exists($username)) {
 			$this->view->Errormsg('该用户已存在，请更换一个用户名');
 		}
 		

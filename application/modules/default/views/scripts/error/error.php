@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php echo Bc_Config::appConfig()->app_name;?></title>
+    <title>出错了！</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,7 +17,7 @@
 	<link href="css/calendar.min.css" rel="stylesheet">
 	<link href="css/bc.css" rel="stylesheet">
 	<link href="assets/ueditor/themes/default/css/umeditor.css" rel="stylesheet" />
-	<link href="css/qy.css" rel="stylesheet">
+	<link href="css/weshop.css" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico">
 
     <script type='text/javascript'>
@@ -37,5 +37,33 @@
 	<![endif]-->
   </head>
 
-  <body>
-    <a class="sr-only" href="#content">Skip to main content</a>
+<body>
+<div class='container'>
+    	<div class='row'>
+    		<div class='alert alert-danger col-sm-8 col-sm-offset-2'>
+    			<h2>出错了</h2>
+    			<h3><?php echo $this->message ?></h3>
+			
+			  <?php if (isset($this->exception)): ?>
+			
+			  <h3>错误情况</h3>
+			  <p>
+			      <b>信息:</b> <?php echo $this->exception->getMessage() ?>
+			  </p>
+			
+			  <?php if (APPLICATION_ENV!='production') { ?>
+			  <h3>Stack trace:</h3>
+			  <pre><?php echo $this->exception->getTraceAsString() ?>
+			  </pre>
+			
+			  <h3>Request Parameters:</h3>
+			  <pre><?php echo var_export($this->request->getParams(), true) ?>
+			  </pre>
+			  <?php } ?>
+			  <?php endif ?>    			
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>
+<?php Bc_Output::doOutput();?>

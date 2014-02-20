@@ -1,11 +1,13 @@
 <?php
 
-class SelfController extends Bc_Controller_Action_Panel {
+class SelfController extends Bc_Controller_Action_Weshop {
 
 	public function init() {
 		parent::init();
 
 		$this->nLogin();
+
+		$this->view->return = $this->view->url(array());
 	}
 	
 	public function modifypasswordAction() {
@@ -23,7 +25,7 @@ class SelfController extends Bc_Controller_Action_Panel {
 		} else {
 			$m = &$this->M('users');
 			$m->update(array(
-				'Password' => md5($newPass)
+				'Password' => $newPass
 			), $m->getAdapter()->quoteInto('id=?', $this->uid));
 			
 			$this->view->successmsg('密码修改成功');

@@ -16,7 +16,7 @@ class LoginController extends Bc_Controller_Action_Weshop {
 			exit(0);
 		} else {
 			$t = &$this->M('users');
-			$row = $t->siteUsername($this->siteId, $user);
+			$row = $t->Username($this->siteId, $user);
 			
 			if (!$row) {
 				$this->view->error = '用户名密码不正确';
@@ -28,22 +28,16 @@ class LoginController extends Bc_Controller_Action_Weshop {
 					echo $this->view->render('login/index.php');
 					exit(0);
 				} else {
-					if ($row['SiteId']!=$this->siteId || $row['Deleted'] || !$row['Status']) {
-						$this->view->error = '用户名密码不正确';
-						echo $this->view->render('login/index.php');
-						exit(0);
-					} else {
-						$this->uid = (int)$row['id'];
-						$this->view->user = $this->user = $row;
-						$this->sess->set('uid', $this->uid);
-						$this->sess->set('last_login', $row['LastLogin'] ? $row['LastLogin'] : '');
-							
-						$t->update(array(
-							'LastLogin' => date('Y-m-d H:i:s')
-							), $t->getAdapter()->quoteInto('id=?', $this->uid));
-							
-						$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('', 'index', $this->MODULE);
-					}
+					$this->uid = (int)$row['id'];
+					$this->view->user = $this->user = $row;
+					$this->sess->set('uid', $this->uid);
+					$this->sess->set('last_login', $row['LastLogin'] ? $row['LastLogin'] : '');
+						
+					$t->update(array(
+						'LastLogin' => date('Y-m-d H:i:s')
+						), $t->getAdapter()->quoteInto('id=?', $this->uid));
+						
+					$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('', 'index', $this->MODULE);
 				}
 			}
 		}

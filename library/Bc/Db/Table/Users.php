@@ -15,13 +15,12 @@ class Bc_Db_Table_Users extends Bc_Db_Table {
 		return parent::update($params, $where);
 	}
 	
-	public function exists($username, $siteId, $userid=0) {
+	public function exists($username, $userid=0) {
 		$db = &$this->getAdapter();
 		$select = &$db->select();
 		$select->from($this->_name);
 		$select->where('id!=?', $userid);
 		$select->where('Username=?', $username);
-		$select->where('SiteId=?', (int)$siteId);
 		$select->limitPage(1, 1);
 		
 		$row = $db->fetchRow($select);
@@ -29,16 +28,4 @@ class Bc_Db_Table_Users extends Bc_Db_Table {
 		return $row ? true : false;
 	}
 
-	public function &siteUsername($siteId, $username) {
-		$db = &$this->getAdapter();
-		$select = &$db->select();
-		$select->from($this->_name);
-		$select->where('Username=?', $username);
-		$select->where('SiteId=?', (int)$siteId);
-		$select->limitPage(1, 1);
-		
-		$row = $db->fetchRow($select);
-
-		return $row;
-	}
 }

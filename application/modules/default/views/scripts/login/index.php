@@ -6,7 +6,7 @@
       	'controller' => 'welcome',
       	'action' => 'index',
       	'module' => $this->MODULE
-      ));?>" class="navbar-brand">WeShop</a>
+      ));?>" class="navbar-brand"><?php echo Bc_Config::appConfig()->app_name;?></a>
     </div>
   </div>
 </header>
@@ -24,11 +24,11 @@
 ));?>' method='post'>
   <div class="form-group">
     <label for="exampleInputEmail1">用户名</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="输入用户名以登录Weshop">
+    <input type="text" class="form-control" id="username" name="username" placeholder="输入用户名以登录<?php echo Bc_Config::appConfig()->app_name;?>">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">密码</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="输入密码以登录Weshop">
+    <input type="password" class="form-control" id="password" name="password" placeholder="输入密码以登录<?php echo Bc_Config::appConfig()->app_name;?>">
   </div>
   <button type="submit" class="btn btn-weshop">登录</button>
 </form>

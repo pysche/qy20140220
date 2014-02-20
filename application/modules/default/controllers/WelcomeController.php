@@ -1,6 +1,6 @@
 <?php
 
-class Weshop_WelcomeController extends Bc_Controller_Action_Weshop {
+class WelcomeController extends Bc_Controller_Action_Weshop {
 	
 	public function init() {
 		parent::init();

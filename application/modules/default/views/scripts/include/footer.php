@@ -1,7 +1,7 @@
 
 	<footer class="bs-footer" role="contentinfo">
       <div class="container">
-        <p>Copyright © 2012-<?php echo date('Y');?> BigCapital.co All Rights Reserved.</p>
+        <p>Copyright © <?php echo date('Y');?> </p>
       </div>
     </footer>
   </body>
