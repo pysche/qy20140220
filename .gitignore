@@ -1,0 +1,13 @@
+INSTALL.txt
+LICENSE.txt
+README.txt
+demos/
+extras/documentation
+.project
+.buildpath
+org.eclipse.*
+.settings/
+*.log
+public/files
+cache/*
+database/*

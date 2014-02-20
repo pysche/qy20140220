@@ -1,0 +1,103 @@
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+	background-color: #5874a8;
+}
+
+.bs-docs-nav {
+	background-color: #5B74A8;
+	border: 1px solid #3B5998;
+	box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);
+}
+
+.bs-docs-nav .navbar-nav > li > a {
+	color: #fff;
+}
+
+.bs-docs-nav .navbar-nav > li > a:hover,
+a.list-group-item.active:hover, a.list-group-item.active:focus {
+	color: #ddd;
+}
+
+.bs-docs-nav .navbar-nav > .active > a, 
+.bs-docs-nav .navbar-nav > .active > a:hover,
+.bs-docs-nav .navbar-nav > .active > a:visited,
+.bs-docs-nav .navbar-nav > .active > a:active {
+	background-color: #133783;	
+}
+
+#msg_success, #msg_error, #ajax_loading {
+	position: fixed;
+	display: none;
+	text-align: center;
+	margin: 0px auto;
+	width: 40%;
+	top: 30;
+	z-index: 3000;
+	min-width: 200px;
+	left: 35%;
+	font-size: 14px;
+}
+
+#ajax_loading {
+	z-index: 9999;
+}
+
+#main_content {
+	padding-top: 20px;
+}
+
+.editor {
+        max-height: 250px;
+        height: 250px;
+        background-color: white;
+        border-collapse: separate; 
+        border: 1px solid rgb(204, 204, 204); 
+        padding: 4px; 
+        box-sizing: content-box; 
+        -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+        box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+        border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+        overflow: scroll;
+        outline: none;
+}
+
+div[data-role="editor-toolbar"] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dropdown-menu a {
+  cursor: pointer;
+}
+
+ul.pagination.bccms {
+	margin: 0px;
+}
+
+
+ol.attach_list { margin: 0px 0px 4px 0px; padding: 0; }
+ol.attach_list li { list-style: none; margin: 5px; padding: 5px; width: 450px; border: 1px solid #e8f4ff; background: #eee; }
+ol.attach_list li:hover { cursor: hand; }
+
+ul.attach_list { margin: 0px; padding: 4px; }
+ul.attach_list li { list-style: none; }
+ul.attach_list li.upload_error { border: 1px solid darkred; color: red; padding-left: 10px; }
+
+div.upload_loading { background: url(../img/loading.gif); width: 24px; }
+ul.attach_list li:hover { cursor: hand; }
+
+.left-menu {
+	padding-top: 20px;
+}
+
+.list-modal .modal-dialog {
+	width: 60%;
+}
+
+.btn-weshop {
+	border-color: #3B5998;
+	background-color: #5B74A8;
+	color: #fff;
+}
