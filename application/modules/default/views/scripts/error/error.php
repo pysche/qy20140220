@@ -17,7 +17,7 @@
 	<link href="css/calendar.min.css" rel="stylesheet">
 	<link href="css/bc.css" rel="stylesheet">
 	<link href="assets/ueditor/themes/default/css/umeditor.css" rel="stylesheet" />
-	<link href="css/weshop.css" rel="stylesheet">
+	<link href="css/qy.css" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico">
 
     <script type='text/javascript'>
