@@ -30,6 +30,7 @@ $(function() {
 			}
 		} else {
 			$('ul.nav.navbar-nav li:first a').trigger('click');
+			$('.left-menu .list-group a.list-group-item.active').trigger('click');
 		}
 	} catch (e) {
 		$('ul.nav.navbar-nav li:first a').trigger('click');
