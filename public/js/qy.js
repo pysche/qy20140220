@@ -115,10 +115,10 @@ $.bcAjax = function(options, target) {
 			if (format=='html') {
 				Bc_bindEvents($('#'+target).empty().append($(html)));
 				
-				var leftMenu = $('div[data-role="left_menu"]').eq(0);
-				if (leftMenu.find('a[href="'+options.url+'"]').size()>0) {
-					leftMenu.find('a').removeClass('active');
-					leftMenu.find('a[href="'+options.url+'"]').addClass('active');
+				var topMenu = $('div[data-role="left_menu"]').eq(0);
+				if (topMenu.find('a[href="'+options.url+'"]').size()>0) {
+					topMenu.find('a').removeClass('active');
+					topMenu.find('a[href="'+options.url+'"]').addClass('active');
 				} else {
 					var found = false;
 					for (var key in config.top_menu) {
@@ -245,12 +245,12 @@ function gotoUrl(url) {
 	});
 };
 
-function leftMenu(key) {
-	var leftMenu = $('div[data-role="left_menu"]').eq(0);
+function topMenu(key) {
+	var topMenu = $('div[data-role="left_menu"]').eq(0);
 	var j = 0;
 	
 	if (typeof config.top_menu[key] != 'undefined') {
-		leftMenu.empty();
+		topMenu.empty();
 		
 		for (var i in config.top_menu[key].sub_menu) {
 			var a = $('<a />').text(config.top_menu[key].sub_menu[i].title).addClass('list-group-item');
@@ -261,33 +261,39 @@ function leftMenu(key) {
 				a.addClass('active');
 			}
 			
-			leftMenu.append(a);
+			topMenu.append(a);
 			j++;
 		}
 		
-		Bc_bindEvents(leftMenu);
+		Bc_bindEvents(topMenu);
 	}
 };
 
 $(function() {
-	$('ul.nav.navbar-nav li a').click(function () {
-		var $this = $(this);
-		var $parent = $this.parent();
-		
-		leftMenu($parent.attr('data-key'));
-		$('ul.nav.navbar-nav li').removeClass('active');
-		$parent.addClass('active');
-	});
-	
 	$thisMenu = $('ul.nav.navbar-nav li[data-key="'+CONTROLLER+'"]');
 	
 	if ($thisMenu.size()>0) {
 		$thisMenu.addClass('active');
-		leftMenu(CONTROLLER);
+		topMenu(CONTROLLER);
 	} else {
 		$('ul.nav.navbar-nav li:first').addClass('active');
-		leftMenu('welcome');
+		topMenu('welcome');
 	}
+
+	$('ul.nav.navbar-nav li[data-role="menu_item"]').hover(function () {
+		$(this).parent().find('li:first').removeClass('active');
+		$(this).find('a[data-toggle="dropdown"]').trigger('click');
+
+		return false;
+	});
+
+	$('ul.nav.navbar-nav li a[data-role="smenu"]').click(function () {
+		var $this = $(this);
+		var $parent = $this.parent().parent().parent();
+
+		$parent.parent().find('li[data-role="menu_item"]').removeClass('active');
+		$parent.addClass('active');
+	});
 	
 	Bc_bindEvents($('body'));
 });

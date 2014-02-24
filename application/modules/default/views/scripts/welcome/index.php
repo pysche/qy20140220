@@ -1,40 +1,31 @@
-<?php include dirname(__FILE__).'/../include/header.php'; ?>
-<?php include dirname(__FILE__).'/../include/top.php'; ?>
+<?php Bc_Output::prepareHtml();?>
+<div class='alert alert-success'>
+	<?php echo $this->user->Realname;?> 您好，欢迎使用<?php echo Bc_Config::appConfig()->app_name;?>。 现在时间是 <?php echo date('Y-m-d H:i:s');?>
+	<?php if ($this->LastLogin) { ?>
+	，您上次登录时间是：<?php echo $this->LastLogin;?>
+	<?php } ?>
+	。
+</div>
 
-<div class="container">
-	<div class='row'>
-		<div class='col-md-2 left-menu'>
-			<div class="list-group" data-role='left_menu'>
-			</div>		
-		</div>
-		<div class='col-md-10' id='main_content'>
-		
+<div class='row'>
+	<div class='col-xs-12 col-sm-12 col-md-12'>
+		<div class='well well-sm'>
+			<!--  -->
+			<div id='calendar'></div>
+			<!--  -->
 		</div>
 	</div>
 </div>
-<iframe class='hide' id='form_target' name='form_target'></iframe>
-<div id='script_target' class='hidden'></div>
-<?php include dirname(__FILE__).'/../include/script.php';?>
 <script type='text/javascript'>
 $(function() {
-	try {
-		var hash = window.location.hash
-		if (hash) {
-			_location = hash.substr(1);
-			if (_location) {
-				$.bcAjax({
-					'url': _location
-				});
-			} else {
-				$('ul.nav.navbar-nav li:first a').trigger('click');
-			}
-		} else {
-			$('ul.nav.navbar-nav li:first a').trigger('click');
-			$('.left-menu .list-group a.list-group-item.active').trigger('click');
-		}
-	} catch (e) {
-		$('ul.nav.navbar-nav li:first a').trigger('click');
-	}
+	var options = {
+		'day': '<?php echo date('Y-m-d');?>',
+		'events_source': [],
+		'tmpl_path': 'assets/calendar/tmpls/',
+		'tmpl_cache': false,
+		'language': 'zh-CN'
+	};
+	$('#calendar').calendar(options);
 });
 </script>
-<?php include dirname(__FILE__).'/../include/footer.php'; ?>
+<?php Bc_Output::doOutput();?>

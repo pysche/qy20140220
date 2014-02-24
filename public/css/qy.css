@@ -101,3 +101,7 @@ ul.attach_list li:hover { cursor: hand; }
 	background-color: #5B74A8;
 	color: #fff;
 }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+	background: #133783 !important;
+}

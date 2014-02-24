@@ -9,6 +9,7 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 	protected $URL = '';
 	protected $sess = null;
 	protected $uid = 0;
+	protected $config = null;
 
 	public function init() {
 		parent::init();
@@ -29,6 +30,8 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 		
 		$this->sess = &Bc_Session::i($this->MODULE);
 		$this->uid = (int)$this->sess->get('uid');
+
+		$this->view->config = $this->config = Bc_Config::appConfig();
 	}
 
 	protected function initSite() {

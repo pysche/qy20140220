@@ -15,12 +15,29 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" data-role='top_menu'>
-      	<?php foreach (Bc_Config::appConfig()->weshop->top_menu->toArray() as $key => $menu) { ?>
-        <li data-key='<?php echo $key;?>'>
-          <a href="javascript: void(0);"><?php echo $menu['name'];?></a>
+        <li><a href='/welcome' data-transport='ajax'>首页</a></li>
+      	<?php foreach ($this->config->weshop->top_menu->toArray() as $key => $menu) { ?>
+        <li data-key='<?php echo $key;?>' data-role="menu_item">
+          <a href="javascript: void(0);" data-toggle="dropdown"><?php echo $menu['name'];?></a>
+          <?php
+          if (count($menu['sub_menu'])>0) {
+          ?>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <?php
+            foreach ($menu['sub_menu'] as $smenu) {
+            ?>
+            <li><a data-role='smenu' href='<?php echo $smenu['link'];?>' data-transport='ajax'><?php echo $smenu['title'];?></a></li>
+            <?php
+            }
+          ?>
+          </ul>
+          <?php
+          }
+          ?>
         </li>
         <?php } ?>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="<?php echo $this->url(array(
