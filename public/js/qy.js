@@ -20,62 +20,6 @@ function Bc_Debug(e) {
 	}
 };
 
-function Bc_AttachListOrders(id) {
-	var aobj = $('[data-role="'+id+'"]').eq(0);
-	size = aobj.find('li').size();
-	
-	if (size>0) {
-		obj = $('[data-role="'+id+'_orders"]');
-		tmp = [];
-		
-		aobj.find('li').each(function(i){
-			tmp.push($(this).attr('fid'));
-		});
-		
-		obj.val(tmp.join(','));
-	}
-};
-
-function Bc_BindAttachSortAndDrag() {
-	$('[data-role="attach_list"], [data-role="attach_list"] li').disableSelection();
-};
-
-function Bc_DelAttachRow(event) {
-	var fid = $(this).attr('fid');
-
-	if (confirm('确定？')) {
-		$.getJSON('files/upload/del?fid='+fid, function(){
-			$('li[fid="'+fid+'"]').remove().replaceWith('');
-			$('input[type="hidden"][value="'+fid+'"]').remove().replaceWith('');
-		});
-	}
-	
-	return false;
-}
-
-function Bc_AppendAttachRow(d, key)
-{
-	key = key ? key : 'attach_list';
-	
-	fid = d.id;
-
-	a = $(document.createElement('a')).attr('fid', fid).attr('href', '#').text('删除').bind('click', Bc_DelAttachRow);
-	_d = fid.substr(0,1);
-	_d2 = fid.substr(1, 1);
-	li = $(document.createElement('li')).attr('fid', fid).append('<a href="/files/'+_d+'/'+_d2+'/'+fid+'.'+d.Ext+'" target="_blank">'+d.Name+'</a>&nbsp;'+Bc_FormatFileSize(d.Size)).append('&nbsp;').append(a);
-	ip = $(document.createElement('input')).attr('type', 'hidden').attr('name', 'fids[]').val(fid);
-
-	$('ol[data-role="'+key+'"]').append(li);
-	$('[data-role="'+key+'_hide"]').append(ip);
-	
-	obj = $('[data-role="'+key+'_orders"]');
-	if (obj.val()=='') {
-		obj.val(fid);
-	}
-	
-	Bc_BindAttachSortAndDrag();
-}
-
 function Bc_ConfirmLink(e) {
 	return confirm('确定吗?');
 };

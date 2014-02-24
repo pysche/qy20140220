@@ -7,7 +7,6 @@ var REQUEST_URI = '<?php echo $_SERVER['REQUEST_URI'];?>';
 <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>  
 <script type='text/javascript' src='assets/calendar/calendar.min.js' charset='utf-8'></script>
 <script src="assets/calendar/calendar-zh-CN.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='js/jquery.ajaxupload.js' charset='utf-8'></script>   
 <script type='text/javascript' src='<?php echo $this->url(array(
 	'controller' => 'config',
 	'action' => 'index',

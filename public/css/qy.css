@@ -105,3 +105,7 @@ ul.attach_list li:hover { cursor: hand; }
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
 	background: #133783 !important;
 }
+
+.modal-fix {
+	margin: 120px auto !important;
+}
