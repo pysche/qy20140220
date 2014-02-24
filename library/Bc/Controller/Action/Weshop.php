@@ -15,11 +15,11 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		);
 	protected $vo = null;
 	protected $ent = array();
+	protected $searchKeys = array();
+	protected $MName = '';
 
 	public function init() {
 		parent::init();
-
-		$this->initSite();
 		
 		if ($this->uid>0) {
 			$user = $this->M('users')->id($this->uid);
@@ -34,10 +34,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			'id' => '',
 			'page' => 1
 			));
-
-		if ($this->site['EntId']) {
-			$this->view->ent = $this->ent = &Bc_Site_Cache::ent($this->site['EntId']);
-		}
 	}
 
 	protected function dbMap($dbCols = array()) {
@@ -124,13 +120,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 	 */
 	public function addAction() {
 		$this->auth('add');
-
-		if (!$this->sess->get('file_hash')) {
-			$this->view->Hash = md5(uniqid(rand()));
-			$this->sess->set('file_hash', $this->view->Hash);
-		} else {
-			$this->view->Hash = $this->sess->get('file_hash');
-		}
 	}
 	
 	/**
@@ -154,22 +143,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$dbMap = $this->dbMap($model->info('cols'));
 			$dbMap['Uid'] = $this->uid;
 			$dbMap['CreateTime'] = date('Y-m-d H:i:s');
-			$dbMap['SiteId'] = $this->siteId;
-			
-			if (!$this->simple) {
-				Bc_Uploader::SaveFilesOrder($this->params['attach_list_orders']);
-				if ($this->params['attach_list_orders']) {
-					$tmp = explode(',', $this->params['attach_list_orders']);
-					$dbMap['FirstAttach'] = $tmp[0];
-				}
-				
-				if (!$dbMap['FirstAttach']) {
-					$files = Bc_File::getByHash($this->params['Hash']);
-					if (count($files)>0) {
-						$dbMap['FirstAttach'] = $files[0]['FileId'];
-					}
-				}
-			}
 			
 			$id = $model->insert($dbMap);
 			$this->sess->set('file_hash');
@@ -198,26 +171,9 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 				
 			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id'));
 			$where .= ' AND '.$db->quoteInto('Uid=?', (int)$this->uid);
-			$where .= ' AND '.$db->quoteInto('SiteId=?', $this->siteId);
-			
-			if (!$this->simple) {
-				if ($this->params['attach_list_orders']) {
-					$tmp = explode(',', $this->params['attach_list_orders']);
-					$dbMap['FirstAttach'] = $tmp[0];
-				}
-				
-				if (!$dbMap['FirstAttach']) {
-					$files = Bc_File::getByHash($this->params['Hash']);
-					if (count($files)>0) {
-						$dbMap['FirstAttach'] = $files[0]['FileId'];
-					}
-				}
-			}
 			
 			$row_affected = $model->update($dbMap, $where);
 			
-			Bc_Uploader::SaveFilesOrder($this->params['attach_list_orders']);
-				
 			foreach ($this->caches2update['update'] as $ckey) {
 				Bc_Site_Cache::$ckey($this->siteId, true);
 			}
@@ -244,12 +200,8 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			if ($row) {
 				$where = $db->quoteInto('id=?', (int)$this->getRequest()->getParam('id'));
 				$where .= ' AND '.$db->quoteInto('Uid=?', $this->uid);
-				$where .= ' AND '.$db->quoteInto('SiteId=?', $this->siteId);
+
 				$row_affected = $model->update(array('Deleted' => 1), $where);
-				
-				if (!$this->simple) {
-					
-				}
 			}
 				
 			foreach ($this->caches2update['delete'] as $ckey) {

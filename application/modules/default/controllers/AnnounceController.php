@@ -1,7 +1,7 @@
 <?php
 
-class ConfigController extends Bc_Controller_Action_Weshop {
-	
+class AnnounceController extends Bc_Controller_Action_Weshop {
+
 	public function init() {
 		parent::init();
 
@@ -11,5 +11,4 @@ class ConfigController extends Bc_Controller_Action_Weshop {
 	public function indexAction() {
 		
 	}
-	
 }

@@ -1,1 +1,1 @@
-var config = <?php echo json_encode($this->config);?>;
+var config = <?php echo json_encode($this->config->weshop->toArray());?>;
