@@ -150,6 +150,7 @@ function msgSuccess(msg) {
 	$('#ajax_loading,#msg_error,#msg_success').hide();
 	$('#msg_success').slideDown();
 	$('#msg_success_content').html(msg);
+	
 	setTimeout(function () {
 		$('#msg_success').slideUp();
 	}, 3000);

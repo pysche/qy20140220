@@ -26,7 +26,7 @@
           <?php
             foreach ($menu['sub_menu'] as $smenu) {
             ?>
-            <li><a data-role='smenu' href='<?php echo $smenu['link'];?>' data-format='html' data-transport='ajax'><?php echo $smenu['title'];?></a></li>
+            <li><a data-role='smenu' href='/<?php echo $smenu['link'];?>' data-format='html' data-transport='ajax'><?php echo $smenu['title'];?></a></li>
             <?php
             }
           ?>
