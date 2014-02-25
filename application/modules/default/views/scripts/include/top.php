@@ -15,7 +15,6 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" data-role='top_menu'>
-        <li><a href='/welcome' data-transport='ajax'>首页</a></li>
       	<?php foreach ($this->config->weshop->top_menu->toArray() as $key => $menu) { ?>
         <li data-key='<?php echo $key;?>' data-role="menu_item">
           <a href="javascript: void(0);" data-toggle="dropdown"><?php echo $menu['name'];?></a>

@@ -22,38 +22,6 @@
 		'action' => 'index',
 		'module' => $this->MODULE
 	), null, true);?>' target='form_target'>
-
-
-	  <div class="form-group">
-	    <label for="Category" class="col-sm-2 control-label">行业机构分类</label>
-	    <div class="col-sm-4">
-	      <select name='Category' id='Category' class='form-control'>
-	      <?php
-	      foreach ($this->config->org_categories->toArray() as $k=>$v) {
-	      ?>
-	      <option value='<?php echo $k;?>'><?php echo $v;?></option>
-	      <?php
-	      }
-	      ?>
-	      </select>
-	    </div>
-	  </div>
-
-	  <div class="form-group">
-	    <label for="Level" class="col-sm-2 control-label">单位分类</label>
-	    <div class="col-sm-4">
-	      <select name='Level' id='Level' class='form-control'>
-	      <?php
-	      foreach ($this->config->org_level->toArray() as $k=>$v) {
-	      ?>
-	      <option value='<?php echo $k;?>'><?php echo $v;?></option>
-	      <?php
-	      }
-	      ?>
-	      </select>
-	    </div>
-	  </div>
-
 	  <div class="form-group">
 	    <label for="Code" class="col-sm-2 control-label">机构代码</label>
 	    <div class="col-sm-10">
