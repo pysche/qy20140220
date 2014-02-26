@@ -11,6 +11,7 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 	protected $uid = 0;
 	protected $config = null;
 	protected $cName = '';
+	protected $mName = '';
 
 	public function init() {
 		parent::init();

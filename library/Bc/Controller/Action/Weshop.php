@@ -70,7 +70,11 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 					
 			}
 		}
-	
+
+		if ($this->params['search_key'] && $this->params['Keywords']) {
+			$where .= ($where ? ' AND ' : '').$model->getAdapter()->quoteInto($this->params['search_key'].' LIKE ?', '%'.$this->params['Keywords'].'%');
+		}
+
 		if (!empty($this->params['orderField'])) {
 			$order = $this->params['orderField'];
 			if (empty($this->params['orderDirection'])) {
@@ -141,11 +145,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			
 			$id = $model->insert($dbMap);
 			$this->sess->set('file_hash');
-				
-			foreach ($this->caches2update['insert'] as $ckey) {
-				Bc_Site_Cache::$ckey($this->siteId, true);
-			}
-	
+			
 			$this->view->Successmsg('操作成功');
 		} catch (Exception $e) {
 			Bc_Log::i()->error($e->getMessage()."\n".$e->getTraceAsString());
@@ -165,13 +165,8 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$db = $model->getAdapter();
 				
 			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id'));
-			
 			$row_affected = $model->update($dbMap, $where);
-			
-			foreach ($this->caches2update['update'] as $ckey) {
-				Bc_Site_Cache::$ckey($this->siteId, true);
-			}
-				
+		
 			$this->view->Successmsg('操作成功');
 		} catch ( Exception $e ) {
 			Bc_Log::i()->error($e);
@@ -196,10 +191,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 				$where .= ' AND '.$db->quoteInto('Uid=?', $this->uid);
 
 				$row_affected = $model->update(array('Deleted' => 1), $where);
-			}
-				
-			foreach ($this->caches2update['delete'] as $ckey) {
-				Bc_Site_Cache::$ckey($this->siteId, true);
 			}
 			
 			$this->view->Successmsg("操作成功");
