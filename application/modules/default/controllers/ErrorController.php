@@ -41,8 +41,10 @@ class ErrorController extends Bc_Controller_Action_Weshop
         $this->view->request   = $errors->request;
         $this->view->code = $code;
 
-        echo $this->view->render('error/fake.php');
-        exit(0);
+        if (APPLCATION_ENV=='production') {
+            echo $this->view->render('error/fake.php');
+            exit(0);
+        }
     }
 
     public function getLog()

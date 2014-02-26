@@ -30,6 +30,7 @@ body,
 .alert {
 	margin-bottom: 12px !important;
 	padding: 8px;
+	text-align: center;
 }
 
 .form-group {
@@ -42,6 +43,10 @@ body,
 
 .well-sm {
 	padding: 9px 9px 0px 9px !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+	padding: 3px 6px !important;
 }
 
 td.td_alert {

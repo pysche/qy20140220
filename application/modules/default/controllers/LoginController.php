@@ -16,15 +16,21 @@ class LoginController extends Bc_Controller_Action_Weshop {
 			exit(0);
 		} else {
 			$t = &$this->M('users');
-			$row = $t->Username($this->siteId, $user);
-			
+			$row = $t->Username($user);
+
 			if (!$row) {
 				$this->view->error = '用户名密码不正确';
 				echo $this->view->render('login/index.php');
 				exit(0);
 			} else {
+				$row = $row->toArray();
+
 				if (md5($pass) != $row['Password']) {
 					$this->view->error = '用户名密码不正确';
+					echo $this->view->render('login/index.php');
+					exit(0);
+				} else if ((int)$row['Status']==0) {
+					$this->view->error = '帐号已停用';
 					echo $this->view->render('login/index.php');
 					exit(0);
 				} else {

@@ -21,6 +21,7 @@ class Bc_Db_Table_Users extends Bc_Db_Table {
 		$select->from($this->_name);
 		$select->where('id!=?', $userid);
 		$select->where('Username=?', $username);
+		$select->where('Deleted=?', 0);
 		$select->limitPage(1, 1);
 		
 		$row = $db->fetchRow($select);

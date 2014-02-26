@@ -14,7 +14,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		'delete' => array()
 		);
 	protected $vo = null;
-	protected $ent = array();
 	protected $searchKeys = array();
 	protected $MName = '';
 
@@ -24,16 +23,15 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		if ($this->uid>0) {
 			$user = $this->M('users')->id($this->uid);
 			if ($user) {
-				$this->view->user = $this->user = $user;
+				$this->view->user = $this->user = $user->toArray();
 			}
 		}
 		
-		$this->view->site = $this->site;
 		$this->view->return = $this->view->url(array(
+			'module' => $this->MODULE,
+			'controller' => $this->cName,
 			'action' => 'index',
-			'id' => '',
-			'page' => 1
-			));
+			), null, true);
 	}
 
 	protected function dbMap($dbCols = array()) {
@@ -92,10 +90,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		}
 	
 		$where = $this->force_where ? ($where ? $where.' AND '.$this->force_where : $this->force_where) : $where;
-		$where .= $where ? ' AND ' : '';
-		$where .= $model->getAdapter()->quoteInto('Uid=?', $this->uid);
-		$where .= ' AND '.$model->getAdapter()->quoteInto('Deleted=?', 0);
-		$where .= ' AND '.$model->getAdapter()->quoteInto('SiteId=?', $this->siteId);
+		$where .= ($where ? ' AND ' : '').$model->getAdapter()->quoteInto('Deleted=?', 0);
 
 		$totalCount = $model->getAdapter()->fetchOne('SELECT COUNT(*) AS COUNT FROM ' . $model->info('name') . (empty($where) ? '' : ' WHERE ' . $where));
 
@@ -170,7 +165,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$db = $model->getAdapter();
 				
 			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id'));
-			$where .= ' AND '.$db->quoteInto('Uid=?', (int)$this->uid);
 			
 			$row_affected = $model->update($dbMap, $where);
 			

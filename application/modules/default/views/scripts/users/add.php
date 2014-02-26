@@ -36,18 +36,35 @@
 	    </div>
 	  </div>
 	  <div class="form-group">
+	    <label for="Realname" class="col-sm-2 control-label">姓名</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="Realname" name="Realname" placeholder="请填写姓名" required value='<?php echo $this->vo->Realname;?>' />
+	    </div>
+	  </div>
+	  <div class="form-group">
 	    <label for="Email" class="col-sm-2 control-label">Email</label>
 	    <div class="col-sm-10">
 	      <input type="text" class="form-control" id="Email" name="Email" placeholder="请填写Email" required value='<?php echo $this->vo->Email;?>' />
 	    </div>
 	  </div>
 	  <div class="form-group">
+	    <label for="Role" class="col-sm-2 control-label">角色</label>
+	    <div class="col-sm-10">
+	      <?php
+	      echo $this->formSelect('Role', $this->vo->Role, array(
+	      	'class' => 'form-control'
+	      	), $this->config->auth->role->toArray());
+	      ?>
+	    </div>
+	  </div>
+	  <div class="form-group">
 	    <label for="Status" class="col-sm-2 control-label">状态</label>
 	    <div class="col-sm-10">
-	    	<?php echo $this->formRadio('Status', 1, array(
+	    	<?php echo $this->formRadio('Status', (int)$this->vo->Status, array(
 	    		
 	    	), array(
-	    		' 启用', ' 禁用'
+	    		1 => ' 启用', 
+	    		0 => ' 禁用'
 	    	), ' ');?>
 	    </div>
 	  </div>
@@ -60,6 +77,9 @@
 	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <button type="submit" class="btn btn-primary">提交</button>
+	      <a class='btn btn-success' href='<?php echo $this->url(array(
+	      	'action' => 'index'
+	      ), null, true);?>' data-transport='ajax'>返回列表</a>
 	    </div>
 	  </div>
 	</form>

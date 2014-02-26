@@ -15,17 +15,18 @@
 	</div>
 	
 	<div class='table-responsive'>
-		<table class="table table-condensed table-hover">
+		<table class="table table-condensed table-hover table-striped">
 			<thead>
 				<tr class='success'>
 					<th width='5%'>#</th>
 					<th width='12%'>用户名</th>
-					<th width='12%'>昵称</th>
+					<th width='12%'>姓名</th>
+					<th>角色</th>
 					<th width='12%'>邮件</th>
 					<th width='15%'>最后登录</th>
 					<th width='10%'>状态</th>
-					<th width='15%'>备注</th>
-					<th>操作</th>
+					<th width=''>备注</th>
+					<th width='10%'>操作</th>
 				</tr>
 			</thead>
 			
@@ -33,12 +34,14 @@
 			<?php 
 			if (count($this->list)>0) {
 				$i = ($this->currentPage-1)*$this->numPerPage + 1;
+				$roles = $this->config->auth->role->toArray();
 				foreach ($this->list as $row) {
 			?>
 			<tr>
 				<td><?php echo $i++;?></td>
 				<td><?php echo $row->Username;?></td>
 				<td><?php echo $row->Realname;?></td>
+				<td><?php echo $roles[$row->Role];?></td>
 				<td><?php echo $row->Email;?></td>
 				<td><?php echo $row->LastLogin ? substr($row->LastLogin, 0, 16) : '--';?></td>
 				<td>
@@ -54,20 +57,25 @@
 					'action' => 'edit',
 					'id' => $row->id
 				));?>' data-target='main_content' data-transport='ajax'>修改</a> 
+				<?php 
+				if ($row->id != $this->user['id']) {
+				?>
 				<a class='label label-danger' href='<?php echo $this->url(array(
 					'action' => 'delete',
 					'id' => $row->id
-				));?>' data-target='main_content' data-transport='ajax'>删除</a></td>
+				));?>' data-target='main_content' data-transport='ajax' data-confirm='1'>删除</a>
+				<?php } ?>
+				</td>
 			</tr>
 			<?php
 				}
 			} else {
 			?>
-			<tr class='danger'>
-				<td colspan='10' class='danger'>
-					<p class='text-center'>
+			<tr>
+				<td colspan='10' class='td_alert'>
+					<div class='alert alert-danger'>
 					暂无数据
-					</p>
+					</div>
 				</td>
 			</tr>
 			<?php 
