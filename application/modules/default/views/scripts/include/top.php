@@ -38,7 +38,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href='#'>当前用户：<?php echo $this->user['Realname'];?></a></li>
+        <li><a href='#'>当前用户：<?php echo $this->user['Realname'];?> (<?php echo $this->CONFIG['auth']['role'][$this->user['Role']];?>)</a></li>
         <li>
           <a href="<?php echo $this->url(array(
           	'action' => 'modifypassword',

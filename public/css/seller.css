@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+.bs-docs-nav {
+	background-color: #1B9AEA !important;
+	border-color: #2caafa !important;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus,
+.bs-docs-nav .navbar-nav > .active > a, .bs-docs-nav .navbar-nav > .active > a:hover, .bs-docs-nav .navbar-nav > .active > a:visited, .bs-docs-nav .navbar-nav > .active > a:active {
+	background-color: #5B74A8 !important;
+}

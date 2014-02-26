@@ -33,6 +33,7 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 		$this->uid = (int)$this->sess->get('uid');
 
 		$this->view->config = $this->config = Bc_Config::appConfig();
+		$this->view->CONFIG = $this->config->toArray();
 	}
 
 	protected function initSite() {

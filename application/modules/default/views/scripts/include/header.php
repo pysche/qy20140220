@@ -18,6 +18,14 @@
 	<link href="css/bc.css" rel="stylesheet">
 	<link href="assets/ueditor/themes/default/css/umeditor.css" rel="stylesheet" />
 	<link href="css/qy.css" rel="stylesheet">
+	<?php
+	if ($this->user['Role']) {
+	?>
+	<link href="css/<?php echo $this->user['Role'];?>.css" rel="stylesheet" />
+	<?php
+	}
+	?>
+	
     <link rel="shortcut icon" href="favicon.ico">
 
     <script type='text/javascript'>
