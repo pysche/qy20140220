@@ -28,7 +28,7 @@
 	    <label for="Category" class="col-sm-2 control-label">行业机构分类</label>
 	    <div class="col-sm-4">
 	    <?php
-	    echo $this->formSelect('Category', $this->vo->Category, array(
+	    echo $this->formSelect('Category', (int)$this->vo->Category, array(
 	    	'class' => 'form-control'
 	    	), $this->config->org_categories->toArray());
 	    ?>
@@ -39,15 +39,11 @@
 	  <div class="form-group">
 	    <label for="Level" class="col-sm-2 control-label">单位分类</label>
 	    <div class="col-sm-4">
-	      <select name='Level' id='Level' class='form-control'>
-	      <?php
-	      foreach ($this->config->org_level->toArray() as $k=>$v) {
-	      ?>
-	      <option value='<?php echo $k;?>'><?php echo $v;?></option>
-	      <?php
-	      }
-	      ?>
-	      </select>
+	    <?php
+	    echo $this->formSelect('Level', (int)$this->vo->Level, array(
+	    	'class' => 'form-control'
+	    	), $this->config->org_level->toArray());
+	    ?>
 	    </div>
 	  </div>
 

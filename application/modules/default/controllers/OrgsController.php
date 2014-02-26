@@ -3,6 +3,9 @@
 class OrgsController extends Bc_Controller_Action_Weshop {
 
 	public function init() {
+		$this->force_where = 'Type=\'org\'';
+		$this->mName = 'Organization';
+
 		parent::init();
 
 		$this->nLogin();
@@ -15,19 +18,9 @@ class OrgsController extends Bc_Controller_Action_Weshop {
 		$this->view->MName = $this->MName = '政府机构维护';
 	}
 
-	public function indexAction() {
+	public function insertAction() {
+		$_REQUEST['Type'] = 'org';
 		
-	}
-	
-	public function addAction() {
-
-	}
-
-	public function editAction() {
-
-	}
-
-	public function deleteAction() {
-
+		parent::insertAction();
 	}
 }

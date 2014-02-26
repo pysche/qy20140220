@@ -3,6 +3,7 @@
 class BuyersController extends Bc_Controller_Action_Weshop {
 	
 	public function init() {
+		$this->force_where = 'Type=\'buy\'';
 		$this->mName = 'Organization';
 
 		parent::init();
@@ -15,5 +16,11 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 			);
 
 		$this->view->MName = $this->MName = '买方机构维护';
+	}
+
+	public function insertAction() {
+		$_REQUEST['Type'] = 'buy';
+		
+		parent::insertAction();
 	}
 }

@@ -41,9 +41,8 @@
 			<thead>
 				<tr class='success'>
 					<th width='7%'>序号</th>
-					<th width='12%'>机构编码</th>
-					<th width=''>机构名称</th>
-					<th width='12%'>机构简称</th>
+					<th width=''>单位名称</th>
+					<th width='12%'>单位简称</th>
 					<th width='12%'>联系人</th>
 					<th width='12%'>地址</th>
 					<th width='10%'>状态</th>
@@ -59,8 +58,8 @@
 			?>
 			<tr>
 				<td><?php echo $i++;?></td>
-				<td><?php echo $row->Code;?></td>
 				<td><?php echo $row->Name;?></td>
+				<td><?php echo $row->Code;?></td>
 				<td><?php echo $row->ShortName;?></td>
 				<td><?php echo $row->Contactor;?></td>
 				<td><?php echo $row->Address;?></td>
@@ -86,8 +85,8 @@
 			} else {
 			?>
 			<tr>
-				<td colspan='10' class='td_alert'>
-					<div class='alert alert-danger'>
+				<td colspan='10'>
+					<div class='alert alert-danger text-center'>
 					暂无数据
 					</div>
 				</td>

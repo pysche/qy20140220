@@ -111,7 +111,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		$this->editAction('list');
 		
 		$model = &$this->M($this->mName);
-		$this->view->vo = $this->vo = $model->fetchRow('id=' . (int)$this->getRequest()->getParam('id'));
+		$this->view->vo = $this->vo = $model->fetchRow('id=' . (int)$this->getRequest()->getParam('id').($this->force_where ? ' AND '.$this->force_where : ''));
 	}
 	
 	/**
@@ -128,7 +128,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		$auth!==null && $this->auth($auth);
 	
 		$model = &$this->M($this->mName);
-		$this->view->vo = $this->vo = $model->fetchRow('id=' . (int)$this->getRequest()->getParam('id'));
+		$this->view->vo = $this->vo = $model->fetchRow('id=' . (int)$this->getRequest()->getParam('id').($this->force_where ? ' AND '.$this->force_where : ''));
 	}
 	
 	/**
@@ -164,7 +164,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$dbMap = $this->dbMap( $model->info('cols'));
 			$db = $model->getAdapter();
 				
-			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id'));
+			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id').($this->force_where ? ' AND '.$this->force_where : ''));
 			$row_affected = $model->update($dbMap, $where);
 		
 			$this->view->Successmsg('操作成功');
@@ -187,8 +187,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$row = $model->fetchRow('id=' . (int)$this->getRequest()->getParam('id'));
 			
 			if ($row) {
-				$where = $db->quoteInto('id=?', (int)$this->getRequest()->getParam('id'));
-				$where .= ' AND '.$db->quoteInto('Uid=?', $this->uid);
+				$where = $db->quoteInto('id=?', (int)$this->getRequest()->getParam('id')).($this->force_where ? ' AND '.$this->force_where : '');
 
 				$row_affected = $model->update(array('Deleted' => 1), $where);
 			}

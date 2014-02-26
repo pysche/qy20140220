@@ -90,7 +90,7 @@ EOF;
 		}
 	}
 
-	public function Successmsg($msg) {
+	public function Successmsg($msg, $exit=true) {
 		$str=<<<EOF
 <script type='text/javascript'>
 var url = '{$this->view->return}';

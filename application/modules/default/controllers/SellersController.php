@@ -3,6 +3,9 @@
 class SellersController extends Bc_Controller_Action_Weshop {
 	
 	public function init() {
+		$this->force_where = 'Type=\'seller\'';
+		$this->mName = 'Organization';
+
 		parent::init();
 
 		$this->nLogin();
@@ -14,12 +17,9 @@ class SellersController extends Bc_Controller_Action_Weshop {
 		$this->view->MName = $this->MName = '卖方机构管理';
 	}
 
-	public function indexAction() {
+	public function insertAction() {
+		$_REQUEST['Type'] = 'seller';
 		
+		parent::insertAction();
 	}
-
-	public function addAction() {
-
-	}
-	
 }
