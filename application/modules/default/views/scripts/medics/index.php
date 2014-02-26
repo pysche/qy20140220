@@ -41,16 +41,15 @@
 			<thead>
 				<tr class='success'>
 					<th width='7%'>序号</th>
-					<th width='12%'>项目编码</th>
-					<th width=''>项目名称</th>
-					<th width='6%'>项目类型</th>
-					<th width='6%'>项目状态</th>
-					<th width='8%'>导入时间</th>
-					<th width='8%'>交易开始</th>
-					<th width='8%'>交易结束</th>
-					<th width='6%'>公/私</th>
+					<th width=''>编号</th>
+					<th width=''>名称</th>
+					<th width=''>通用名</th>
+					<th width=''>注册证号</th>
+					<th width=''>有效期</th>
+					<th width=''>品牌</th>
+					<th width=''>生产企业</th>
+					<th width='6%'>经销企业</th>
 
-					<th width='6%'>协议</th>
 					<th width='6%'>修改</th>
 					<th width='6%'>删除</th>
 					<th width='6%'>操作</th>
@@ -82,9 +81,6 @@
 				<?php echo $row->Start;?>
 				</td>
 				<td>
-				<?php echo $row->End;?>
-				</td>
-				<td>
 				<a class='label label-primary' href='<?php echo $this->url(array(
 					'action' => 'edit',
 					'id' => $row->id
@@ -101,7 +97,7 @@
 			} else {
 			?>
 			<tr>
-				<td colspan='20'>
+				<td colspan='20' class='td_alert'>
 					<div class='alert alert-danger text-center'>
 					暂无数据
 					</div>

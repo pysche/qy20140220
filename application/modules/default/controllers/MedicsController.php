@@ -7,8 +7,9 @@ class MedicsController extends Bc_Controller_Action_Weshop {
 
 		$this->nLogin();
 		$this->view->searchKeys = $this->searchKeys = array(
-			'Code' => '项目代码',
-			'Name' => '项目名称',
+			'Code' => '编号',
+			'Name' => '名称',
+			'NormalName' => '通用名'
 			);
 
 		$this->view->MName = $this->MName = '商品管理';
