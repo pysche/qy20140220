@@ -41,13 +41,15 @@
 			<thead>
 				<tr class='success'>
 					<th width='7%'>序号</th>
-					<th width='8%'>项目代码</th>
-					<th width=''>项目名称</th>
-					<th width='12%'>单位简称</th>
-					<th width='12%'>联系人</th>
-					<th width='25%'>地址</th>
-					<th width='10%'>状态</th>
-					<th width='10%'>操作</th>
+					<th width='12%'>协议编码</th>
+					<th width=''>协议名称</th>
+					<th width='8%'>协议状态</th>
+					<th width='8%'>公/私</th>
+					<th width='8%'>自动生成</th>
+					<th width='8%'>来源项目类型</th>
+					<th width='10%'>生效日期</th>
+					<th width='10%'>失效日期</th>
+					<th width='8%'>进入</th>
 				</tr>
 			</thead>
 			
@@ -86,8 +88,8 @@
 			} else {
 			?>
 			<tr>
-				<td colspan='10' class='td_alert'>
-					<div class='alert alert-danger text-center'>
+				<td colspan='20' class='td_alert'>
+					<div class='alert alert-danger'>
 					暂无数据
 					</div>
 				</td>

@@ -41,13 +41,15 @@
 			<thead>
 				<tr class='success'>
 					<th width='7%'>序号</th>
-					<th width='8%'>项目代码</th>
+					<th width='12%'>项目编码</th>
 					<th width=''>项目名称</th>
-					<th width='12%'>单位简称</th>
-					<th width='12%'>联系人</th>
-					<th width='25%'>地址</th>
-					<th width='10%'>状态</th>
-					<th width='10%'>操作</th>
+					<th width='10%'>项目状态</th>
+					<th width='10%'>相关招标项目</th>
+					<th width='10%'>备案项目类型</th>
+					<th width='10%'>备案开始时间</th>
+					<th width='10%'>备案结束时间</th>
+					<th width='6%'>修改</th>
+					<th width='6%'>删除</th>
 				</tr>
 			</thead>
 			
@@ -59,11 +61,8 @@
 			?>
 			<tr>
 				<td><?php echo $i++;?></td>
-				<td><?php echo $row->Name;?></td>
 				<td><?php echo $row->Code;?></td>
-				<td><?php echo $row->ShortName;?></td>
-				<td><?php echo $row->Contactor;?></td>
-				<td><?php echo $row->Address;?></td>
+				<td><?php echo $row->Name;?></td>
 				<td>
 				<?php if ($row->Status) { ?>
 				<span class='label label-success'>已启用</span>
@@ -71,11 +70,23 @@
 				<span class='label label-danger'>已禁用</span>
 				<?php } ?>
 				</td>
+				<td><?php echo '--';?></td>
+				<td>
+				<?php echo $row->Category;?>
+				</td>
+				<td>
+				<?php echo $row->Start;?>
+				</td>
+				<td>
+				<?php echo $row->End;?>
+				</td>
 				<td>
 				<a class='label label-primary' href='<?php echo $this->url(array(
 					'action' => 'edit',
 					'id' => $row->id
 				));?>' data-target='main_content' data-transport='ajax'>修改</a> 
+				</td>
+				<td>
 				<a class='label label-danger' href='<?php echo $this->url(array(
 					'action' => 'delete',
 					'id' => $row->id
@@ -86,7 +97,7 @@
 			} else {
 			?>
 			<tr>
-				<td colspan='10' class='td_alert'>
+				<td colspan='10'>
 					<div class='alert alert-danger text-center'>
 					暂无数据
 					</div>

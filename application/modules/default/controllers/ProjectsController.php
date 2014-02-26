@@ -11,11 +11,7 @@ class ProjectsController extends Bc_Controller_Action_Weshop {
 			'Name' => '项目名称',
 			);
 
-		$this->view->MName = $this->MName = '备案项目管理';
+		$this->view->MName = $this->MName = '项目管理';
 	}
 
-	public function indexAction() {
-		
-	}
-	
 }
