@@ -1,0 +1,1 @@
+<?php include APPLICATION_PATH . '/modules/default/views/scripts/include/top.php';

@@ -1,0 +1,1 @@
+<?php include APPLICATION_PATH . '/modules/default/views/scripts/include/footer.php';
