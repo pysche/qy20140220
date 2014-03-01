@@ -28,7 +28,9 @@
 	  <div class="form-group">
 	    <input type="text" class="form-control" name='Keywords' id="keywords" placeholder="输入关键字" value='<?php echo $this->params['Keywords'];?>' />
 	  </div>
-	  <button type="submit" class="btn btn-primary" data-role='search'>搜索</button>
+	  <div class='form-group'>
+	  	<button type="submit" class="btn btn-primary" data-role='search'>搜索</button>
+	  </div>
 	</form>
 	</div>
 	

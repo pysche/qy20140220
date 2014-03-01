@@ -6,7 +6,15 @@
 	    <label class="sr-only" for="username_keyword">用户名</label>
 	    <input type="text" class="form-control" name='Username' id="username_keyword" placeholder="用户名" value='<?php echo $this->params['Username'];?>' />
 	  </div>
-	  <button type="submit" class="btn btn-primary" data-role='search'>搜索</button>
+	  <div class='form-group'>
+	  <label class='sr-only' for='role'>身份</label>
+	  <?php echo $this->formSelect('Role', $this->params['Role'], array(
+	  	'class' => 'form-control'
+	  	), array_merge(array(''=>'* 用户身份 *'), $this->config->auth->role->toArray()));?>
+	  </div>
+	  <div class='form-group'>
+	  	<button type="submit" class="btn btn-primary" data-role='search'>搜索</button>
+	  </div>
 	  
 	  <a class='btn btn-success pull-right' href='<?php echo $this->url(array(
 	  	'action' => 'add',
@@ -21,7 +29,7 @@
 					<th width='5%'>#</th>
 					<th width='12%'>用户名</th>
 					<th width='12%'>姓名</th>
-					<th>角色</th>
+					<th>身份</th>
 					<th width='12%'>邮件</th>
 					<th width='15%'>最后登录</th>
 					<th width='10%'>状态</th>

@@ -10,7 +10,7 @@ class LogsController extends Bc_Controller_Action_Weshop {
 			'Title' => '日志标题',
 			);
 
-		$this->view->MName = $this->MName = '日志查看';
+		$this->view->MName = $this->MName = '系统操作记录';
 	}
 	
 }

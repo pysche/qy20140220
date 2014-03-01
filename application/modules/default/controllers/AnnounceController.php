@@ -6,9 +6,10 @@ class AnnounceController extends Bc_Controller_Action_Weshop {
 		parent::init();
 
 		$this->nLogin();
-	}
+		$this->view->searchKeys = $this->searchKeys = array(
+			'Title' => '公告标题',
+			);
 
-	public function indexAction() {
-		
+		$this->view->MName = $this->MName = '内部公告管理';
 	}
 }

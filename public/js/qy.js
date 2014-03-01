@@ -1,4 +1,5 @@
 var LAST_HASH = '';
+var EDITOR_LOADED = false;
 
 function Bc_FormatFileSize(size) {
 	re = '';
@@ -22,6 +23,29 @@ function Bc_Debug(e) {
 
 function Bc_ConfirmLink(e) {
 	return confirm('确定吗?');
+};
+
+function Bc_CreateEditor(dom) {
+	callback = function () {
+	    KindEditor.create(dom, {
+	      themeType : 'qq',
+	      items : [
+	        'bold','italic','underline','fontname','fontsize','forecolor','hilitecolor','plug-align','plug-order','plug-indent','link'
+	      ]
+	    });
+	};
+
+	if (!EDITOR_LOADED) {
+	 $.getScript('/js/kindeditor/kindeditor-min.js', function() {
+	    KindEditor.basePath = '/js/kindeditor/';
+
+	    EDITOR_LOADED = true;
+
+	    callback();
+	  });
+	} else {
+		callback();
+	}
 };
 
 $.bcAjax = function(options, target) {
@@ -144,6 +168,12 @@ function Bc_bindEvents(dom) {
 	dom.find('input[data-role="datepicker"]').datepicker({
 		'dateFormat': 'yy-mm-dd'
 	});
+
+  	Bc_CreateEditor(dom.find('textarea[data-role="kindeditor"]'));
+
+  	dom.find('form textarea[data-role="kindeditor"]').submit(function () {
+  		KindEditor.sync('[data-role="kindeditor"]');
+  	});
 };
 
 function msgSuccess(msg) {
