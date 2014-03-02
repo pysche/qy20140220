@@ -7,7 +7,11 @@ class SelfController extends Bc_Controller_Action_Weshop {
 
 		$this->nLogin();
 
-		$this->view->return = $this->view->url(array());
+		$this->view->return = $this->view->url(array(
+			'controller' => 'self',
+			'module' => $this->MODULE,
+			'action' => 'modifypassword'
+			));
 	}
 	
 	public function modifypasswordAction() {
