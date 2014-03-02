@@ -28,17 +28,27 @@
 		</tr>
 
 		<?php
-		$i = 1;
-		foreach ($this->list as $row) {
-		?>
-		<tr>
-			<td><?php echo $i;?></td>
-			<td><?php echo $row->Title;?></td>
-			<td><?php echo substr($row->CreateTime, 0, 16);?></td>
-			<td><a href='#' data-role='inner_link' class='label label-danger'>立即处理</a></td>
-		</tr>
-		<?php
-			$i++;
+		if (count($this->todos)>0) {
+			$i = 1;
+			foreach ($this->list as $row) {
+			?>
+			<tr>
+				<td><?php echo $i;?></td>
+				<td><?php echo $row->Title;?></td>
+				<td><?php echo substr($row->CreateTime, 0, 16);?></td>
+				<td><a href='#' data-role='inner_link' class='label label-danger'>立即处理</a></td>
+			</tr>
+			<?php
+				$i++;
+			}
+		} else {
+			?>
+			<tr>
+				<td class='td_alert' colspan='10'>
+					<div class='alert alert-success'>暂无待办事项</div>
+				</td>
+			</tr>
+			<?php
 		}
 		?>
 		</table>
