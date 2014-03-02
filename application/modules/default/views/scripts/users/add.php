@@ -3,14 +3,13 @@
 	<ol class="breadcrumb">
 	  <li><a href="<?php echo $this->url(array(
 	  	'controller' => 'welcome',
-	  	'action' => 'dashboard',
 	  	'module' => $this->MODULE
-	  ));?>" data-transport="ajax">首页</a></li>
+	  ), null, true);?>" data-transport="ajax">首页</a></li>
 	  <li><a href="<?php echo $this->url(array(
 	  	'controller' => $this->cName,
 	  	'module' => $this->MODULE,
 	  	'action' => 'index'
-	  ));?>" data-transport="ajax">用户列表</a></li>
+	  ), null, true);?>" data-transport="ajax">系统用户管理</a></li>
 	  <li class="active"><?php echo $this->vo->id ? '修改' : '新建';?>用户</li>
 	</ol>
 	

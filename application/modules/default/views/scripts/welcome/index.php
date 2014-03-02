@@ -1,4 +1,12 @@
 <?php Bc_Output::prepareHtml();?>
+
+	<ol class="breadcrumb">
+	  <li><a href="<?php echo $this->url(array(
+	  	'controller' => 'welcome',
+	  	'module' => $this->MODULE
+	  ), null, true);?>" data-transport="ajax">首页</a></li>
+	</ol>
+
 <div class='alert alert-success'>
 	<?php echo $this->user->Realname;?> 您好，欢迎使用<?php echo Bc_Config::appConfig()->app_name;?>。 现在时间是 <?php echo date('Y-m-d H:i:s');?>
 	<?php if ($this->LastLogin) { ?>

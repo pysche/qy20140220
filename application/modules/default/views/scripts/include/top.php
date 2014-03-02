@@ -9,9 +9,8 @@
       </button>
       <a href="<?php echo $this->url(array(
       	'controller' => 'welcome',
-      	'action' => 'index',
       	'module' => $this->MODULE
-      ));?>" class="navbar-brand"><?php echo Bc_Config::appConfig()->app_name;?></a>
+      ), null, true);?>" class="navbar-brand"><?php echo Bc_Config::appConfig()->app_name;?></a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav" data-role='top_menu'>

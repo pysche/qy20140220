@@ -25,6 +25,8 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$user = $this->M('users')->id($this->uid);
 			if ($user) {
 				$this->view->user = $this->user = $user->toArray();
+
+				$this->actor = $this->user['Realname'];
 			}
 		}
 		
@@ -215,17 +217,5 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		} catch ( Exception $e ) {
 			$this->error ( '操作失败' );
 		}
-	}
-		
-	protected function logit(array $params) {
-		$this->M('logs')->insert(array(
-			'CreateTime' => date('Y-m-d H:i:s'),
-			'Uid' => $this->uid,
-			'Ip' => Bc_Request::clientIp(),
-			'Title' => $params['Title'],
-			'Memo' => $params['Memo'] ? $params['Memo'] : '',
-			'Content' => $params['Content'] ? $params['Content'] : '',
-			'Actor' => $this->actor
-			));
 	}
 }

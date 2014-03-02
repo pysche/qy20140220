@@ -59,4 +59,16 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 			$this->_helper->getHelper('Redirector')->gotoSimple('', 'login', $this->MODULE);
 		}
 	}
+		
+	protected function logit(array $params) {
+		$this->M('logs')->insert(array(
+			'CreateTime' => date('Y-m-d H:i:s'),
+			'Uid' => $this->uid,
+			'Ip' => Bc_Request::clientIp(),
+			'Title' => $params['Title'],
+			'Memo' => $params['Memo'] ? $params['Memo'] : '',
+			'Content' => $params['Content'] ? $params['Content'] : '',
+			'Actor' => $this->actor
+			));
+	}
 }

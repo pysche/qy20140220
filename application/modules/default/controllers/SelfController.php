@@ -31,6 +31,11 @@ class SelfController extends Bc_Controller_Action_Weshop {
 			$m->update(array(
 				'Password' => $newPass
 			), $m->getAdapter()->quoteInto('id=?', $this->uid));
+
+			$this->logit(array(
+				'Title' => '修改密码',
+				'Content' => '--'
+				));
 			
 			$this->view->successmsg('密码修改成功');
 		}

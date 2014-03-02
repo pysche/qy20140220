@@ -1,5 +1,13 @@
 <?php Bc_Output::prepareHtml();?>
 <div class='row'>
+	<ol class="breadcrumb">
+	  <li><a href="<?php echo $this->url(array(
+	  	'controller' => 'welcome',
+	  	'module' => $this->MODULE
+	  ), null, true);?>" data-transport="ajax">首页</a></li>
+	  <li class="active">系统用户管理</li>
+	</ol>
+
 	<div class='well well-sm'>
 	<form class="form-inline" role="form" method='post' action='<?php echo $this->url(array());?>' data-target='main_content' data-role='search' data-transport='ajax'>
 	  <div class="form-group">
