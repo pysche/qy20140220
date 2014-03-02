@@ -17,11 +17,31 @@
 
 <div class='row'>
 	<div class='col-md-6'>
-		<div class='well well-sm'>
-			<!--  -->
-			<div id='calendar'></div>
-			<!--  -->
-		</div>
+		<h4>待办事项</h4>
+
+		<table class='table table-hover table-striped'>
+		<tr>
+			<th width='10%'>序号</th>
+			<th width='25%'>类别</th>
+			<th>详情</th>
+			<th width='25%'>操作</th>
+		</tr>
+
+		<?php
+		$i = 1;
+		foreach ($this->list as $row) {
+		?>
+		<tr>
+			<td><?php echo $i;?></td>
+			<td><?php echo $row->Title;?></td>
+			<td><?php echo substr($row->CreateTime, 0, 16);?></td>
+			<td><a href='#' data-role='inner_link' class='label label-danger'>立即处理</a></td>
+		</tr>
+		<?php
+			$i++;
+		}
+		?>
+		</table>
 	</div>
 
 	<div class='col-md-6'>
@@ -47,6 +67,17 @@
 		}
 		?>
 		</table>
+	</div>
+</div>
+<hr />
+<h4>日历</h4>
+<div class='row'>
+	<div class='col-md-12'>
+		<div class='well well-sm'>
+			<!--  -->
+			<div id='calendar'></div>
+			<!--  -->
+		</div>
 	</div>
 </div>
 <script type='text/javascript'>
