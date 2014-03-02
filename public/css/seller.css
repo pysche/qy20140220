@@ -7,5 +7,5 @@
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus,
 .bs-docs-nav .navbar-nav > .active > a, .bs-docs-nav .navbar-nav > .active > a:hover, .bs-docs-nav .navbar-nav > .active > a:visited, .bs-docs-nav .navbar-nav > .active > a:active {
-	background-color: #5B74A8 !important;
+	background-color: darkblue !important;
 }
