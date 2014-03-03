@@ -23,6 +23,17 @@
 		'module' => $this->MODULE
 	), null, true);?>' target='form_target'>
 
+    <div class="form-group">
+      <label for="ParentId" class="col-sm-2 control-label">所在地区</label>
+      <div class="col-sm-4">
+	      <?php
+	      echo $this->formSelect('RegionId', (int)$this->vo->RegionId ? $this->vo->RegionId : $this->RegionId, array(
+	      	'class' => 'form-control'
+	      	), $this->levels);
+	      ?>
+      </div>
+    </div>
+
 	  <div class="form-group">
 	    <label for="Level" class="col-sm-2 control-label">单位分类</label>
 	    <div class="col-sm-4">

@@ -39,4 +39,8 @@ class Bc_Session
 			$_SESSION[$this->module][$key] = $val;
 		}
 	}
+	
+	public function destroy() {
+		$_SESSION[$this->module] = array();
+	}
 }

@@ -52,7 +52,8 @@ class LoginController extends Bc_Controller_Action_Weshop {
 	public function logoutAction() {
 		$this->uid = 0;
 		$this->sess->set('uid');
-	
+		$this->sess->destroy();
+		
 		$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('', 'login', $this->MODULE);
 	}
 }

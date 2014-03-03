@@ -55,8 +55,8 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 	}
 
 	protected function nLogin() {
-		if (!$this->auth()) {
-			$this->_helper->getHelper('Redirector')->gotoSimple('', 'login', $this->MODULE);
+		if (!$this->uid) {
+			$this->_helper->getHelper('Redirector')->gotoSimple('', 'login', 'default');
 		}
 	}
 		

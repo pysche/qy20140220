@@ -17,6 +17,8 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 	protected $searchKeys = array();
 	protected $MName = '';
 	protected $actor = '';
+	protected $role = '';
+	protected $restrictRole = 'admin';
 
 	public function init() {
 		parent::init();
@@ -27,6 +29,11 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 				$this->view->user = $this->user = $user->toArray();
 
 				$this->actor = $this->user['Realname'];
+				
+				$this->role = $this->user['Role'];
+				if ($this->restrictRole && $this->role!=$this->restrictRole) {
+					$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('logout', 'login', 'default');
+				}
 			}
 		}
 		
