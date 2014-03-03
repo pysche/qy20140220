@@ -1,6 +1,6 @@
 <?php
 
-class MedicsController extends Bc_Controller_Action_Weshop {
+class MedicinesController extends Bc_Controller_Action_Weshop {
 	
 	public function init() {
 		parent::init();
@@ -12,7 +12,7 @@ class MedicsController extends Bc_Controller_Action_Weshop {
 			'NormalName' => '通用名'
 			);
 
-		$this->view->MName = $this->MName = '商品管理';
+		$this->view->MName = $this->MName = '药品目录';
 	}
 
 	public function indexAction() {

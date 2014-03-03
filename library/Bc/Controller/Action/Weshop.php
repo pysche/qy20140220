@@ -149,6 +149,8 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$id = $model->insert($dbMap);
 			$this->sess->set('file_hash');
 			
+			$this->afterInsert();
+			
 			$this->view->Successmsg('操作成功');
 		} catch (Exception $e) {
 			Bc_Log::i()->error($e->getMessage()."\n".$e->getTraceAsString());
@@ -167,9 +169,12 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$dbMap = $this->dbMap( $model->info('cols'));
 			$db = $model->getAdapter();
 				
-			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id').($this->force_where ? ' AND '.$this->force_where : ''));
+			$where = $db->quoteInto ('id=?', (int)$this->getRequest()->getParam('id')).($this->force_where ? ' AND '.$this->force_where : '');
+
 			$row_affected = $model->update($dbMap, $where);
 		
+			$this->afterUpdate();
+			
 			$this->view->Successmsg('操作成功');
 		} catch ( Exception $e ) {
 			Bc_Log::i()->error($e);
@@ -195,6 +200,8 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 				$row_affected = $model->update(array('Deleted' => 1), $where);
 			}
 			
+			$this->afterDelete();
+			
 			$this->view->Successmsg("操作成功");
 		} catch ( Exception $e ) {
 			Bc_Log::i()->error($e);
@@ -218,4 +225,17 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$this->error ( '操作失败' );
 		}
 	}
+	
+	protected function afterInsert() {
+		
+	}
+	
+	protected function afterUpdate() {
+		
+	}
+	
+	protected function afterDelete() {
+		
+	}
+	
 }
