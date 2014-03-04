@@ -6,12 +6,17 @@ class Bc_Db_Table_Medicines extends Bc_Db_Table {
 		$rows = array();
 		$db = &$this->getAdapter();
 		$tDirectories = &Bc_Db::t('directories');
+		$tOrg = &Bc_Db::t('Organization');
 		
+		$dJoin = 'd.medicine_id=m.id';
+		$params['org_id'] && $dJoin .= ' AND '.$db->quoteInto('d.org_id=?', $params['org_id']);
+
 		$select = &$db->select();
 		$select->from($this->_name.' AS m');
-		$select->joinleft($tDirectories->getName().' AS d', 'd.medicine_id=m.id', array(
+		$select->joinleft($tDirectories->getName().' AS d', $dJoin, array(
 			new Zend_Db_Expr('d.id AS `Choosed`')
 		));
+		
 		$params['where'] && $select->where($params['where']);
 		$params['order'] && $select->order($params['order']);
 		
@@ -26,12 +31,15 @@ class Bc_Db_Table_Medicines extends Bc_Db_Table {
 		$rows = array();
 		$db = &$this->getAdapter();
 		$tDirectories = &Bc_Db::t('directories');
+		$tOrg = &Bc_Db::t('Organization');
+		
+		$dJoin = 'd.medicine_id=m.id';
+		$params['org_id'] && $dJoin .= ' AND '.$db->quoteInto('d.org_id=?', $params['org_id']);
 		
 		$select = &$db->select();
-		$select->from($this->_name.' AS m', 'COUNT(*) AS `Total`');
-		$select->joinleft($tDirectories->getName().' AS d', 'd.medicine_id=m.id', array(
-			new Zend_Db_Expr('m.id AS `Choosed`')
-		));
+		$select->from($this->_name.' AS m', 'COUNT(*) AS Total');
+		$select->joinleft($tDirectories->getName().' AS d', $dJoin, array());
+		
 		$params['where'] && $select->where($params['where']);
 		
 		$row = $db->fetchRow($select);

@@ -1,23 +1,22 @@
 <?php
 
-class BuyersController extends Bc_Controller_Action_Weshop {
+class TransorgController extends Bc_Controller_Action_Weshop {
 	
 	protected $level = null;
 	
 	public function init() {
-		$this->force_where = 'Type=\'buy\'';
+		$this->force_where = 'Type=\'trans\'';
 		$this->mName = 'Organization';
 
 		parent::init();
 
 		$this->nLogin();
-
 		$this->view->searchKeys = $this->searchKeys = array(
 			'Code' => '机构代码',
 			'Name' => '机构名称',
 			);
 
-		$this->view->MName = $this->MName = '医院机构维护';
+		$this->view->MName = $this->MName = '配送机构管理';
 		
 		$this->level = new Bc_Level(array(
 			'id_key' => 'id',
@@ -27,6 +26,12 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 			'tbl' => 'regions'
 		));
 		$this->view->levels = Bc_Funcs::array_merge(array('0' => '* 请选择 *'), $this->level->levelSelect);
+	}
+
+	public function insertAction() {
+		$this->params['Type'] = $_REQUEST['Type'] = 'trans';
+		
+		parent::insertAction();
 	}
 
 	public function setmedicinesAction() {
@@ -44,12 +49,6 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 		$json = json_encode($data);
 		die($json);
 	}
-
-	public function insertAction() {
-		$_REQUEST['Type'] = 'buy';
-		
-		parent::insertAction();
-	}
 	
 	public function medicinesAction() {
 		include_once dirname(__FILE__).'/MedicinesController.php';
@@ -57,7 +56,7 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 		$obj = new MedicinesController($this->getRequest(), $this->getResponse());
 		$obj->init();
 		$obj->sp('Status', 1);
-		$obj->sp('OrgId', $this->getRequest()->getParam('buyer_id', 0));
+		$obj->sp('OrgId', $this->params['trans_id']);
 		$obj->view = &$this->view;
 		$obj->indexAction();
 	}

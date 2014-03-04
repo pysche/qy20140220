@@ -22,7 +22,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 
 	public function init() {
 		parent::init();
-		
+
 		if ($this->uid>0) {
 			$user = $this->M('users')->id($this->uid);
 			if ($user) {

@@ -13,6 +13,8 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 	protected $cName = '';
 	protected $mName = '';
 
+	protected $params = array();
+
 	public function init() {
 		parent::init();
 		
@@ -39,6 +41,10 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 	protected function initSite() {
 
 	}
+
+	public function sp($key, $val) {
+		$this->params[$key] = $val;
+	}	
 
 	protected function &M($m='') {
 		return Bc_Db::t($m ? $m : $this->_request->getControllerName());

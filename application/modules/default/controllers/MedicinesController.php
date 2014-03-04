@@ -60,17 +60,19 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 		}
 		
 		$where = $this->force_where ? ($where ? $where.' AND '.$this->force_where : $this->force_where) : $where;
-		$where .= ($where ? ' AND ' : '').$model->getAdapter()->quoteInto('Deleted=?', 0);
+		$where .= ($where ? ' AND ' : '').$model->getAdapter()->quoteInto('m.Deleted=?', 0);
 		
 		$totalCount = $model->cnt(array(
 			'where' => $where,
+			'org_id' => $this->params['OrgId']
 		));
 		
 		$this->view->list = $model->search(array(
 			'where' => $where,
 			'order' => $order,
 			'page' => $pageNum ? $pageNum : 1,
-			'limit' => $numPerPage
+			'limit' => $numPerPage,
+			'org_id' => $this->params['OrgId']
 		));
 		$this->view->totalCount = $totalCount;
 		$this->view->numPerPage = $numPerPage;

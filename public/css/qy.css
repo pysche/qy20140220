@@ -155,7 +155,9 @@ ul.attach_list li:hover { cursor: hand; }
 	width: 60%;
 }
 
-#buyer_medicines .modal-dialog {
+#buyer_medicines .modal-dialog,
+#trans_medicines .modal-dialog,
+#seller_medicines .modal-dialog {
 	width: 800px !important;
 }
 
