@@ -16,7 +16,7 @@ class SellersController extends Bc_Controller_Action_Weshop {
 			'Name' => '机构名称',
 			);
 
-		$this->view->MName = $this->MName = '卖方机构管理';
+		$this->view->MName = $this->MName = '经销机构管理';
 		
 		$this->level = new Bc_Level(array(
 			'id_key' => 'id',

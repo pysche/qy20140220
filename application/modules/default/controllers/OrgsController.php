@@ -17,7 +17,7 @@ class OrgsController extends Bc_Controller_Action_Weshop {
 			'Name' => '单位名称',
 			);
 
-		$this->view->MName = $this->MName = '政府机构维护';
+		$this->view->MName = $this->MName = '监管机构维护';
 		
 		$this->level = new Bc_Level(array(
 			'id_key' => 'id',
