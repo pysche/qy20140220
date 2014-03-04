@@ -45,12 +45,12 @@
 	</form>
 	</div>
 	
+	<form name='list'>
 	<div class='table-responsive'>
 		<table class="table table-condensed table-hover">
 			<thead>
 				<tr class='success'>
 					<th width='7%'>序号</th>
-					<th width=''>编号</th>
 					<th width=''>名称</th>
 					<th width=''>通用名</th>
 					<th width=''>剂型</th>
@@ -69,7 +69,6 @@
 			?>
 			<tr>
 				<td><?php echo $i++;?></td>
-				<td><?php echo $row['Code'];?></td>
 				<td><?php echo $row['Name'];?></td>
 				<td><?php echo $row['ProdName'];?></td>
 				<td>
@@ -85,7 +84,7 @@
 				<?php echo $row['OriginPrice'];?>
 				</td>
 				<td>
-				<?php echo $this->formCheckbox('choosed', $row['id'], array(
+				<?php echo $this->formCheckbox('choosed[]', $row['id'], array(
 					'checked' => (int)$row['Choosed']>0 ? true : false
 				));?>
 				</td>
@@ -111,6 +110,7 @@
 			<?php echo $this->Pager($this->currentPage, $this->totalCount, $this->numPerPage);?>
 		</div>
 	</div>
+	<input type='hidden' id='buyer_id' value='<?php echo (int)$this->params['buyer_id'];?>' />
+</form>
 </div>
-
 <?php Bc_Output::doOutput();?>

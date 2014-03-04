@@ -122,9 +122,43 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-danger">保存</button>
+        <button type="button" class="btn btn-danger" id='save_directory'>保存</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
+
+<script type='text/javascript'>
+var eurl = '<?php echo $this->url(array(
+	'action' => 'set_medicines',
+	'controller' => $this->cName,
+	'module' => $this->MODULE
+	), null, true);?>';
+$(function () {
+	$('#save_directory').unbind('click').bind('click', function () {
+		var form = $('#buyer_medicines_body form[name="list"]');
+		var ids = [];
+		var cbs = form.find(':checked').each(function () {
+			var $this = $(this);
+			ids.push($this.val());
+		});
+		var buyerId = form.find('#buyer_id').val();
+
+		$.bcAjax({
+			'url': eurl,
+			'data': {
+				'ids': ids,
+				'id': buyerId
+			},
+			'history': 'false',
+			'type': 'post',
+			'format': 'json',
+			'success': function (json) {
+				$('#buyer_medicines').modal('hide');
+				msgSuccess('操作成功！');
+			}
+		});
+	});
+});
+</script>
 <?php Bc_Output::doOutput();?>

@@ -7,7 +7,6 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 
 		$this->nLogin();
 		$this->view->searchKeys = $this->searchKeys = array(
-			'Code' => '编号',
 			'Name' => '名称',
 			'NormalName' => '通用名'
 			);

@@ -43,18 +43,17 @@
 			<thead>
 				<tr class='success'>
 					<th width='7%'>序号</th>
-					<th width=''>编号</th>
 					<th width=''>名称</th>
 					<th width=''>通用名</th>
-					<th width=''>注册证号</th>
-					<th width=''>有效期</th>
-					<th width=''>品牌</th>
+					<th width=''>剂型</th>
+					<th width=''>规格</th>
+					<th width=''>单位</th>
+					<th width=''>价格</th>
 					<th width=''>生产企业</th>
-					<th width='6%'>经销企业</th>
-
-					<th width='6%'>修改</th>
-					<th width='6%'>删除</th>
-					<th width='6%'>操作</th>
+					<th width=''>配送企业</th>
+					<th>基本药物</th>
+					<th>二级医院<br />基本药物</th>
+					<th width='100'>操作</th>
 				</tr>
 			</thead>
 			
@@ -66,32 +65,48 @@
 			?>
 			<tr>
 				<td><?php echo $i++;?></td>
-				<td><?php echo $row->Code;?></td>
-				<td><?php echo $row->Name;?></td>
+				<td><?php echo $row['Name'];?></td>
+				<td><?php echo $row['ProdName'];?></td>
+				<td><?php echo $row['DosageForm'];?></td>
+				<td><?php echo $row['Spec'];?></td>
+				<td><?php echo $row['Unit'];?></td>
+				<td><?php echo $row['OriginPrice'];?></td>
+				<td>--</td>
+				<td>--</td>
 				<td>
-				<?php if ($row->Status) { ?>
-				<span class='label label-success'>已启用</span>
-				<?php } else { ?>
-				<span class='label label-danger'>已禁用</span>
-				<?php } ?>
+				<?php 
+				if ((int)$row['IsBasic']>0) {
+				?>
+				<label class='label label-success'>是</label>
+				<?php 
+				} else {
+				?>
+				<label class='label label-danger'>否</label>
+				<?php 
+				}
+				?>
 				</td>
-				<td><?php echo '--';?></td>
-				<td>
-				<?php echo $row->Category;?>
-				</td>
-				<td>
-				<?php echo $row->Start;?>
+				<td><?php 
+				if ((int)$row['IsLevel2Basic']>0) {
+				?>
+				<label class='label label-success'>是</label>
+				<?php 
+				} else {
+				?>
+				<label class='label label-danger'>否</label>
+				<?php 
+				}
+				?>
 				</td>
 				<td>
 				<a class='label label-primary' href='<?php echo $this->url(array(
 					'action' => 'edit',
-					'id' => $row->id
+					'id' => $row['id']
 				));?>' data-target='main_content' data-transport='ajax'>修改</a> 
-				</td>
-				<td>
+				
 				<a class='label label-danger' href='<?php echo $this->url(array(
 					'action' => 'delete',
-					'id' => $row->id
+					'id' => $row['id']
 				));?>' data-target='main_content' data-transport='ajax'>删除</a></td>
 			</tr>
 			<?php

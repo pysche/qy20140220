@@ -22,12 +22,6 @@
     'action' => 'index',
     'module' => $this->MODULE
   ), null, true);?>' target='form_target'>
-    <div class="form-group">
-      <label for="Code" class="col-sm-2 control-label">药品编号</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="Code" name="Code" placeholder="请填写药品编号" required value='<?php echo $this->vo->Code;?>' />
-      </div>
-    </div>
 
     <div class="form-group">
       <label for="Name" class="col-sm-2 control-label">名称</label>
@@ -37,9 +31,9 @@
     </div>
 
     <div class="form-group">
-      <label for="NormalName" class="col-sm-2 control-label">药品名称</label>
+      <label for="ProdName" class="col-sm-2 control-label">通用名称</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="NormalName" name="NormalName" placeholder="请填写药品名称" required value='<?php echo $this->vo->NormalName;?>' />
+        <input type="text" class="form-control" id="ProdName" name="ProdName" placeholder="请填写通用名称" required value='<?php echo $this->vo->ProdName;?>' />
       </div>
     </div>
 
@@ -65,9 +59,9 @@
     </div>
 
     <div class="form-group">
-      <label for="Price" class="col-sm-2 control-label">单价</label>
+      <label for="ImportPrice" class="col-sm-2 control-label">单价</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control " id="Price" name="Price" placeholder="" value='<?php echo $this->vo->Price;?>' />
+        <input type="text" class="form-control " id="ImportPrice" name="ImportPrice" placeholder="" value='<?php echo $this->vo->ImportPrice;?>' />
       </div>
       <div class="col-md-1">
       元
@@ -99,6 +93,7 @@
         <button type="submit" class="btn btn-primary">提交</button>
 
         <button type="reset" class="btn btn-warning">重新填写</button>
+        <input type='hidden' name='id' value='<?php echo (int)$this->vo->id;?>' />
 
         <a href="<?php echo $this->url(array(
           'module' => $this->MODULE,

@@ -29,6 +29,22 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 		$this->view->levels = Bc_Funcs::array_merge(array('0' => '* 请选择 *'), $this->level->levelSelect);
 	}
 
+	public function setmedicinesAction() {
+		$data = array();
+
+		$ids = (array)$_POST;
+		$id = (int)$this->getRequest()->getParam('id');
+		if ($id && count($ids)>0) {
+			$dao = $this->M('directories');
+			foreach ($ids as $mid) {
+				$dao->save($id, $mid);
+			}
+		}
+
+		$json = json_encode($data);
+		die($json);
+	}
+
 	public function insertAction() {
 		$_REQUEST['Type'] = 'buy';
 		

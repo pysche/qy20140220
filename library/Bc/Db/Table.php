@@ -64,5 +64,17 @@ abstract class Bc_Db_Table extends Zend_Db_Table {
 	public function getName() {
 		return $this->_name;
 	}
+
+	public function startTrans() {
+		$this->getAdapter()->query('START TRANSACTION');
+	}
+
+	public function commitTrans() {
+		$this->getAdapter()->query('COMMIT');
+	}
+
+	public function rollbackTrans() {
+		$this->getAdapter()->query('ROLLBACK');
+	}
 	
 }
