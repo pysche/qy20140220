@@ -49,6 +49,7 @@
 					<th width='12%'>联系人</th>
 					<th width='12%'>地址</th>
 					<th width='10%'>状态</th>
+					<th width='12%'>药品目录维护</th>
 					<th width='10%'>操作</th>
 				</tr>
 			</thead>
@@ -72,6 +73,14 @@
 				<?php } else { ?>
 				<span class='label label-danger'>已禁用</span>
 				<?php } ?>
+				</td>
+				<td>
+					<a class='label label-success' href='<?php echo $this->url(array(
+						'module' => $this->MODULE,
+						'controller' => $this->cName,
+						'action' => 'medicines',
+						'seller_id' => $row->id
+					), null, true);?>' data-target='seller_medicines' data-transport='modal'>设置目录</a>
 				</td>
 				<td>
 				<a class='label label-primary' href='<?php echo $this->url(array(
@@ -105,4 +114,52 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id='seller_medicines' data-role='modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id='seller_medicines_body'>
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-danger" id='save_directory'>保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type='text/javascript'>
+var eurl = '<?php echo $this->url(array(
+	'action' => 'set_medicines',
+	'controller' => $this->cName,
+	'module' => $this->MODULE
+	), null, true);?>';
+$(function () {
+	$('#save_directory').unbind('click').bind('click', function () {
+		var form = $('#seller_medicines_body form[name="list"]');
+		var ids = [];
+		var cbs = form.find(':checked').each(function () {
+			var $this = $(this);
+			ids.push($this.val());
+		});
+		var transId = form.find('#seller_id').val();
+
+		$.bcAjax({
+			'url': eurl,
+			'data': {
+				'ids': ids,
+				'id': transId
+			},
+			'history': 'false',
+			'type': 'post',
+			'format': 'json',
+			'success': function (json) {
+				$('#seller_medicines').modal('hide');
+				msgSuccess('操作成功！');
+			}
+		});
+	});
+});
+</script>
 <?php Bc_Output::doOutput();?>
