@@ -155,6 +155,10 @@ ul.attach_list li:hover { cursor: hand; }
 	width: 60%;
 }
 
+#buyer_medicines .modal-dialog {
+	width: 800px !important;
+}
+
 .btn-weshop {
 	border-color: #3B5998;
 	background-color: #5B74A8;

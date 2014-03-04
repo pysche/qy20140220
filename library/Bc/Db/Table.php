@@ -54,4 +54,15 @@ abstract class Bc_Db_Table extends Zend_Db_Table {
 	public function count($where='') {
 		return $this->getAdapter()->fetchOne('SELECT COUNT(*) AS `count` FROM `'.$this->_name.'` '.($where ? 'WHERE '.$where : ''));
 	}
+	
+	public function search(array $params) {
+		$db = &$this->getAdapter();
+		$select = &$db->select();
+		
+	}
+
+	public function getName() {
+		return $this->_name;
+	}
+	
 }

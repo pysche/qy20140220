@@ -135,7 +135,8 @@ function Bc_bindEvents(dom) {
 					'top': top+'px'
 				});
 				modal.modal('show');
-			}
+			},
+			'history': 'false'
 		}, mtarget);
 		
 		return false;
@@ -150,12 +151,15 @@ function Bc_bindEvents(dom) {
 		var $action = $this.attr('action');
 		var $method = $this.attr('method') ? $this.attr('method') : 'post';
 		var $redirect = $this.attr('data-redirect');
+		var $target = $this.attr('data-target');
+		var $history = $this.attr('data-history');
 		
 		$.bcAjax({
 			'url': $action,
 			'data': $this.serialize(),
-			'type': $method
-		});
+			'type': $method,
+			'history': $history
+		}, $target);
 		
 		return false;
 	});

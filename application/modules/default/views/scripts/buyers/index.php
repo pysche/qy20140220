@@ -47,8 +47,8 @@
 					<th width=''>机构名称</th>
 					<th width='12%'>机构简称</th>
 					<th width='12%'>联系人</th>
-					<th width='12%'>地址</th>
 					<th width='10%'>状态</th>
+					<th width='12%'>药品目录维护</th>
 					<th width='10%'>操作</th>
 				</tr>
 			</thead>
@@ -65,7 +65,6 @@
 				<td><?php echo $row->Name;?></td>
 				<td><?php echo $row->ShortName;?></td>
 				<td><?php echo $row->Contactor;?></td>
-				<td><?php echo $row->Address;?></td>
 				<td>
 				<?php if ($row->Status) { ?>
 				<span class='label label-success'>已启用</span>
@@ -74,6 +73,15 @@
 				<?php } ?>
 				</td>
 				<td>
+					<a class='label label-success' href='<?php echo $this->url(array(
+						'module' => $this->MODULE,
+						'controller' => $this->cName,
+						'action' => 'medicines',
+						'buyer_id' => $row->id
+					), null, true);?>' data-target='buyer_medicines' data-transport='modal'>设置目录</a>
+				</td>
+				<td>
+				
 				<a class='label label-primary' href='<?php echo $this->url(array(
 					'action' => 'edit',
 					'id' => $row->id
@@ -105,4 +113,18 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id='buyer_medicines' data-role='modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id='buyer_medicines_body'>
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-danger">保存</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <?php Bc_Output::doOutput();?>

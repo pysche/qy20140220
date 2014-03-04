@@ -34,4 +34,13 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 		
 		parent::insertAction();
 	}
+	
+	public function medicinesAction() {
+		include_once dirname(__FILE__).'/MedicinesController.php';
+		$_REQUEST['Status'] = 1;
+		$obj = new MedicinesController($this->getRequest(), $this->getResponse());
+		$obj->init();
+		$obj->view = &$this->view;
+		$obj->indexAction();
+	}
 }
