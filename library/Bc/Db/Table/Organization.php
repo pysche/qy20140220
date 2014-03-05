@@ -34,4 +34,31 @@ class Bc_Db_Table_Organization extends Bc_Db_Table {
 
 		return $db->fetchRow($select);
 	}
+
+	public function simpleAll() {
+		$db = &$this->getAdapter();
+		$select = &$db->select();
+		$select->from($this->_name);
+		$select->where('Deleted=?', '0');
+		$select->where('Status=?', '1');
+		$select->order('Name ASC');
+
+		return $db->fetchAll($select);
+	}
+
+	public function insert($params) {
+		$result = parent::insert($params);
+		$cacher = Bc_Cache_Remote::getInstance();
+		$cacher->set('uorgs');
+
+		return $result;
+	}
+
+	public function update($params, $where) {
+		$result = parent::update($params, $where);
+		$cacher = Bc_Cache_Remote::getInstance();
+		$cacher->set('uorgs');
+
+		return $result;
+	}
 }

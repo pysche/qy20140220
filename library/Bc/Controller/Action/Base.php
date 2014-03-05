@@ -31,7 +31,7 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 		
 		$this->params = $this->view->params = $this->getRequest()->getParams();
 		
-		$this->sess = &Bc_Session::i($this->MODULE);
+		$this->sess = &Bc_Session::i('default');
 		$this->uid = (int)$this->sess->get('uid');
 
 		$this->view->config = $this->config = Bc_Config::appConfig();

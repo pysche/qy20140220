@@ -57,6 +57,16 @@
 	    </div>
 	  </div>
 	  <div class="form-group">
+	  	<label for="OrgId" class="col-sm-2 control-label">机构</label>
+	  	<div class="col-sm-10">
+	  		<?php
+	  			echo $this->formSelect('OrgId', $this->vo->OrgId, array(
+	  				'class' => 'form-control'
+	  				), $this->orgs);
+	  		?>
+	  	</div>
+	  </div>
+	  <div class="form-group">
 	    <label for="Status" class="col-sm-2 control-label">状态</label>
 	    <div class="col-sm-10">
 	    	<?php echo $this->formRadio('Status', (int)$this->vo->Status, array(

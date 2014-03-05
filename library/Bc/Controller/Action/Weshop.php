@@ -31,9 +31,6 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 				$this->actor = $this->user['Realname'];
 				
 				$this->role = $this->user['Role'];
-				if ($this->restrictRole && $this->role!=$this->restrictRole) {
-					$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('logout', 'login', 'default');
-				}
 			}
 		}
 		
@@ -243,6 +240,14 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 	
 	protected function afterDelete() {
 		
+	}
+
+	protected function nLogin() {
+		parent::nLogin();
+
+		if ($this->restrictRole && $this->role!=$this->restrictRole) {
+			$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('logout', 'login', 'default');
+		}
 	}
 	
 }

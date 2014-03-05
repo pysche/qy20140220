@@ -1,6 +1,6 @@
 <?php
 
-class WelcomeController extends Bc_Controller_Action_Weshop {
+class Buyer_WelcomeController extends Bc_Controller_Action_Buyer {
 	protected $restrictRole = '';
 	
 	public function init() {

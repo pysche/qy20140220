@@ -48,6 +48,7 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 
 					$Trans = trim($sheet->getCell('I'.$i)->getValue());
 					$Factory = trim($sheet->getCell('F'.$i)->getValue());
+					$Buyer = trim($sheet->getCell('N'.$i)->getValue());
 					
 					$dFactory = $tOrg->seller($Factory);
 					if (!$dFactory) {
@@ -77,6 +78,21 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 						$TransId = $dTrans['id'];
 					}
 
+					$dBuyer = $tOrg->buyer($Buyer);
+					
+					if (!$dBuyer) {
+						$BuyerId = $tOrg->insert(array(
+							'Name' => $Buyer,
+							'Type' => 'buyer',
+							'CreateTime' => date('Y-m-d H:i:s'),
+							'Deleted' => 0,
+							'Uid' => $this->uid,
+							'Status' => 1
+							));
+					} else {
+						$BuyerId = $dBuyer['id'];
+					}
+
 					$medicineId = $tMedicines->insert(array(
 						'Name' => $Name,
 						'ProdName' => $ProdName,
@@ -91,6 +107,7 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 
 					$tDirectories->save($TransId, $medicineId);
 					$tDirectories->save($SellerId, $medicineId);
+					$tDirectories->save($BuyerId, $medicineId);
 				}
 
 				$this->logit(array(

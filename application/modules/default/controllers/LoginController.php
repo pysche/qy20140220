@@ -42,8 +42,8 @@ class LoginController extends Bc_Controller_Action_Weshop {
 					$t->update(array(
 						'LastLogin' => date('Y-m-d H:i:s')
 						), $t->getAdapter()->quoteInto('id=?', $this->uid));
-						
-					$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('', 'index', $this->MODULE);
+
+					$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('', 'index', $this->user['Role']);
 				}
 			}
 		}

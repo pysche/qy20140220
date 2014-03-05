@@ -5,7 +5,7 @@ class BuyersController extends Bc_Controller_Action_Weshop {
 	protected $level = null;
 	
 	public function init() {
-		$this->force_where = 'Type=\'buy\'';
+		$this->force_where = 'Type=\'buyer\'';
 		$this->mName = 'Organization';
 
 		parent::init();
