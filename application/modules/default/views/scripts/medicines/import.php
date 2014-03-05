@@ -21,7 +21,7 @@
     'controller' => $this->cName,
     'action' => 'import',
     'module' => $this->MODULE
-  ), null, true);?>' target='sssform_target' enctype='multipart/form-data'>
+  ), null, true);?>' target='form_target' enctype='multipart/form-data'>
 
     <div class="form-group">
       <label for="File" class="col-sm-2 control-label">药品数据文件</label>

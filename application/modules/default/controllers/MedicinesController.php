@@ -21,15 +21,88 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 	public function doimportAction() {
 		$file = &$_FILES['File'];
 		if ($file) {
-			header('Content-Type: text/html; charset=utf-8');
-			$tmpName = $file['tmp_name'];
-			$c = iconv('gbk', 'utf8', file_get_contents($tmpName));
-			$lines = explode("\n\r", $c);
+			try {
+				$tmpName = $file['tmp_name'];
+				include 'Vendor/PHPExcel.php';
+				$reader = PHPExcel_IOFactory::createReader('Excel2007');
+				$reader->setReadDataOnly(true);
+				$excel = $reader->load($tmpName);
+				$sheet = $excel->getActiveSheet();
 
-			foreach ($lines as $line) {
-				echo $line.'<HR>';
+				$tDirectories = &Bc_Db::t('directories');
+				$tMedicines = &Bc_Db::t('medicines');
+				$tOrg = &Bc_Db::t('organization');
+				$range = range('A', 'M');
+				$rows = $sheet->getHighestRow();
+
+				for ($i=2;$i<=$rows;$i++) {
+					$Name = trim($sheet->getCell('A'.$i)->getValue());
+					$ProdName = trim($sheet->getCell('B'.$i)->getValue());
+					$DosageForm = trim($sheet->getCell('C'.$i)->getValue());
+					$Spec = trim($sheet->getCell('D'.$i)->getValue());
+					$Unit = trim($sheet->getCell('E'.$i)->getValue());
+					$ImportPrice = trim($sheet->getCell('G'.$i)->getValue());
+					$Usage = trim($sheet->getCell('H'.$i)->getValue());
+					$IsBasic = trim($sheet->getCell('K'.$i)->getValue());
+					$IsLevel2Basic = trim($sheet->getCell('L'.$i)->getValue());
+
+					$Trans = trim($sheet->getCell('I'.$i)->getValue());
+					$Factory = trim($sheet->getCell('F'.$i)->getValue());
+					
+					$dFactory = $tOrg->seller($Factory);
+					if (!$dFactory) {
+						$SellerId = $tOrg->insert(array(
+							'Name' => $Factory,
+							'Type' => 'seller',
+							'CreateTime' => date('Y-m-d H:i:s'),
+							'Deleted' => 0,
+							'Uid' => $this->uid,
+							'Status' => 1
+							));
+					} else {
+						$SellerId = $dFactory['id'];
+					}
+
+					$dTrans = $tOrg->trans($Trans);
+					if (!$dTrans) {
+						$TransId = $tOrg->insert(array(
+							'Name' => $Factory,
+							'Type' => 'trans',
+							'CreateTime' => date('Y-m-d H:i:s'),
+							'Deleted' => 0,
+							'Uid' => $this->uid,
+							'Status' => 1
+							));
+					} else {
+						$TransId = $dTrans['id'];
+					}
+
+					$medicineId = $tMedicines->insert(array(
+						'Name' => $Name,
+						'ProdName' => $ProdName,
+						'DosageForm' => $DosageForm,
+						'Spec' => $Spec,
+						'Unit' => $Unit,
+						'ImportPrice' => $ImportPrice,
+						'Usage' => $Usage,
+						'IsBasic' => $IsBasic,
+						'IsLevel2Basic' => $IsLevel2Basic
+						));
+
+					$tDirectories->save($TransId, $medicineId);
+					$tDirectories->save($SellerId, $medicineId);
+				}
+
+				$this->logit(array(
+					'Title' => '导入药品基础数据',
+					'Content' => '共 '.$rows.' 条数据'
+				));
+				$this->view->Successmsg('操作成功');
+			} catch (Exception $e) {
+				echo '<H1>'.$e->getMessage().'</h1>';
+				echo $e->getTraceAsString();exit;
+				$this->view->Errormsg('导入失败: '.$e->getMessage());
 			}
-			var_dump($lines);exit;
 		}
 	}
 
