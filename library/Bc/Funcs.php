@@ -60,4 +60,17 @@ class Bc_Funcs {
 		}
 		return $result;
 	}
+	
+	public static function pages($total, $limit) {
+		$pages = 0;
+		
+		if ($limit>0) {
+			$pages = intval($total/$limit);
+			if ($pages*$limit!=$total) {
+				$pages = $pages+1;
+			}
+		}
+		
+		return $pages;
+	}
 }

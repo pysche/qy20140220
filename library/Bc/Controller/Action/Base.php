@@ -12,7 +12,7 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 	protected $config = null;
 	protected $cName = '';
 	protected $mName = '';
-
+	protected $pager = array();
 	protected $params = array();
 
 	public function init() {
@@ -76,5 +76,15 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 			'Content' => $params['Content'] ? $params['Content'] : '',
 			'Actor' => $this->actor
 			));
+	}
+	
+	protected function pager_init($params=array()) {
+		foreach ($params as $k=>$v) {
+			$this->pager[$k] = $v;
+		}
+	
+		$this->pager['page'] = $params['page'] ? (int)$params['page'] : (int)$this->getRequest()->getParam('pg', (int)$this->getRequest()->getParam('page', 1));
+		$this->pager['limit'] = $params['limit'] ? (int)$params['limit'] : (int)$this->getRequest()->getParam('limit', (int)$this->getRequest()->getParam('rows', 10));
+		$this->pager['skip'] = $params['skip'] ? (int)$params['skip'] : $this->pager['limit']*($this->pager['page']-1);
 	}
 }
