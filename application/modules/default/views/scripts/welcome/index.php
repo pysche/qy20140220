@@ -69,7 +69,12 @@
 		?>
 		<tr>
 			<td><?php echo $i;?></td>
-			<td><?php echo $row->Title;?></td>
+			<td><a href='<?php echo $this->url(array(
+				'module' => 'default',
+				'controller' => 'public',
+				'action' => 'announce',
+				'id' => $row->id
+			), null, true);?>' data-target='mwelcome' data-transport='modal'><?php echo $row->Title;?></a></td>
 			<td><?php echo substr($row->CreateTime, 0, 16);?></td>
 		</tr>
 		<?php
@@ -90,6 +95,21 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" id='mwelcome' data-role='modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id='mwelcome_body'>
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type='text/javascript'>
 $(function() {
 	var options = {
