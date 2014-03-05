@@ -14,6 +14,25 @@ class MedicinesController extends Bc_Controller_Action_Weshop {
 		$this->view->MName = $this->MName = '药品目录';
 	}
 
+	public function importAction() {
+
+	}
+
+	public function doimportAction() {
+		$file = &$_FILES['File'];
+		if ($file) {
+			header('Content-Type: text/html; charset=utf-8');
+			$tmpName = $file['tmp_name'];
+			$c = iconv('gbk', 'utf8', file_get_contents($tmpName));
+			$lines = explode("\n\r", $c);
+
+			foreach ($lines as $line) {
+				echo $line.'<HR>';
+			}
+			var_dump($lines);exit;
+		}
+	}
+
 	public function indexAction() {
 		$this->auth('list');
 		
