@@ -47,6 +47,7 @@ class Bc_Db_Table_Orders extends Bc_Db_Table {
 		$startDate = $params['start_date'];
 		$endDate = $params['end_date'];
 		$code = $params['code'];
+		$transId = $params['trans_id'];
 		
 		$tUser = &Bc_Db::t('users');
 		$tOrg = &Bc_Db::t('organization');
@@ -56,6 +57,10 @@ class Bc_Db_Table_Orders extends Bc_Db_Table {
 		
 		if ($uid) {
 			$select->where('o.Uid=?', $uid);
+		}
+
+		if ($transId) {
+			$select->where('o.TransId=?', $transId);
 		}
 		
 		if (strlen($startDate)) {
