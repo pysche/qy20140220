@@ -158,8 +158,13 @@ ul.attach_list li:hover { cursor: hand; }
 #buyer_medicines .modal-dialog,
 #trans_medicines .modal-dialog,
 #seller_medicines .modal-dialog,
-#mwelcome .modal-dialog {
+#mwelcome .modal-dialog,
+.tmp-modal .modal-dialog {
 	width: 800px !important;
+}
+
+.tmp-modal .modal-dialog {
+	margin: 40px auto !important;
 }
 
 .btn-weshop {

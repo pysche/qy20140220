@@ -41,7 +41,7 @@ class Bc_Db_Table_Organization extends Bc_Db_Table {
 		$select->from($this->_name);
 		$select->where('Deleted=?', '0');
 		$select->where('Status=?', '1');
-		$select->order('Name ASC');
+		$select->order('CONVERT(`Name` USING gbk) ASC');
 
 		return $db->fetchAll($select);
 	}

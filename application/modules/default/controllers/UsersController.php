@@ -44,32 +44,4 @@ class UsersController extends Bc_Controller_Action_Weshop {
 		
 		parent::insertAction();
 	}
-	
-	private function &_orgsArr() {
-		$cacher = &Bc_Cache_Remote::getInstance();
-		$ck = 'uorgs';
-		$arr = $cacher->get($ck);
-
-		if (!$arr) {
-			$arr = array(
-				'' => '* 请设置机构 *'
-				);
-			$dao = &Bc_Db::t('organization');
-			$rows = $dao->simpleAll();
-			$names = $this->config->auth->role->toArray();
-
-			foreach ($rows as $row) {
-				$k = '		----====	'.$names[$row['Type']].'	====----	';
-				if (!$arr[$k]) {
-					$arr[$k] = array();
-				}
-
-				$arr[$k][$row['id']] = $row['Name'];
-			}
-
-			$cacher->set($ck, $arr);
-		}
-
-		return $arr;
-	}
 }

@@ -128,12 +128,28 @@
 			?>
 			<tr class='success'>
 				<td colspan='20'>
-					<p class='text-center'>
+					<div class='text-center'>
 						<button type='button' class='btn btn-warning' data-role='reverse_all' data-target='medicines_list'>反选</button>
 						<button type='button' class='btn btn-success' data-role='choose_all' data-target='medicines_list'>全选</button>
 						<button type='button' class='btn btn-danger' data-role='unchoose_all' data-target='medicines_list'>全不选</button>
 
-					</p>
+					</div>
+				</td>
+			</tr>
+			<tr class='warning'>
+				<td colspan='20'>
+					<div class='text-center'>
+						<button type='button' class='btn btn-warning' id='mass_set_default_trans' data-role='mass_action' data-from='medicines_list' data-target='modal' data-action='<?php echo $this->url(array(
+							'module' => $this->MODULE,
+							'controller' => $this->cName,
+							'action' => 'settrans'
+						), null, true);?>'>批量设定默认配送商</button> 
+						<button type='button' class='btn btn-danger' id='mass_delete' data-role='mass_action' data-from='medicines_list' data-target='ajax' data-action='<?php echo $this->url(array(
+							'module' => $this->MODULE,
+							'controller' => $this->cName,
+							'action' => 'massdelete'
+						), null, true);?>'>批量删除</button>
+					</div>
 				</td>
 			</tr>
 			<?php

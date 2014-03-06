@@ -90,4 +90,13 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 		$this->pager['limit'] = $params['limit'] ? (int)$params['limit'] : (int)$this->getRequest()->getParam('limit', (int)$this->getRequest()->getParam('rows', 10));
 		$this->pager['skip'] = $params['skip'] ? (int)$params['skip'] : $this->pager['limit']*($this->pager['page']-1);
 	}
+
+	protected function json(array $params = array()) {
+		$output = json_encode($params);
+		header('Content-Type: application/json');
+		header('Content-Length: '.strlen($output));
+		echo $output;
+		flush();
+		exit(0);
+	}
 }

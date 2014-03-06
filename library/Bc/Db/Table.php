@@ -44,11 +44,28 @@ abstract class Bc_Db_Table extends Zend_Db_Table {
 		return $this->fetchAll($where, null);
 	}
 
+	public function save($id, array $params) {
+		$db = &$this->getAdapter();
+		$where = $db->quoteInto('id=?', $id);
+
+		return $this->update($params, $where);
+	}
+
 	public function doDelete($id) {
 		$db = &$this->getAdapter();
 		$where = $db->quoteInto('id=?', $id);
 
 		return $this->delete($where);
+	}
+
+	public function massDelete($ids) {
+		if (is_array($ids) && count($ids)>0) {
+			$db = &$this->getAdapter();
+			$where = $db->quoteInto('id IN (?)', $ids);
+			$this->update(array(
+				'Deleted' => 1
+				), $where);
+		}
 	}
 	
 	public function count($where='') {

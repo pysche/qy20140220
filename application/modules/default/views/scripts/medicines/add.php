@@ -76,6 +76,19 @@
     </div>
 
     <div class="form-group">
+      <label for="DefaultTrans" class="col-sm-2 control-label">默认配送企业</label>
+      <div class="col-sm-4">
+        <?php
+          $keys = array_keys($this->orgs);
+
+          echo $this->formSelect('DefaultTrans', $this->vo->DefaultTrans, array(
+            'class' => 'form-control'
+            ), Bc_Funcs::array_merge(array('' => '* 请选择 *'), $this->orgs[$keys[1]]));
+        ?>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="Settings" class="col-sm-2 control-label">其他设置</label>
       <div class="col-sm-10">
         <?php echo $this->formCheckbox('IsBasic', 1, array(

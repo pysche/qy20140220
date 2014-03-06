@@ -25,6 +25,22 @@ function Bc_ConfirmLink(e) {
 	return confirm('确定吗?');
 };
 
+function msgSuccess(msg) {
+	$('#ajax_loading,#msg_error,#msg_success').hide();
+	$('#msg_success').slideDown();
+	$('#msg_success_content').html(msg);
+	
+	setTimeout(function () {
+		$('#msg_success').slideUp();
+	}, 3000);
+};
+
+function msgError(msg) {
+	$('#ajax_loading,#msg_error,#msg_success').hide();
+	$('#msg_error_content').html(msg);
+	$('#msg_error').slideDown();
+};
+
 function Bc_CreateEditor(dom) {
 	callback = function () {
 	    KindEditor.create(dom, {
@@ -60,6 +76,8 @@ $.bcAjax = function(options, target) {
 	
 	if (typeof options.history != 'undefined' && options.history == 'false') {
 		history = false;
+	} else {
+		LAST_HASH = options.url;
 	}
 	
 	options.cache = false;
@@ -203,22 +221,51 @@ function Bc_bindEvents(dom) {
   		
   		return false;
   	});
-};
 
-function msgSuccess(msg) {
-	$('#ajax_loading,#msg_error,#msg_success').hide();
-	$('#msg_success').slideDown();
-	$('#msg_success_content').html(msg);
-	
-	setTimeout(function () {
-		$('#msg_success').slideUp();
-	}, 3000);
-};
+  	dom.find('button[data-role="mass_action"]').click(function (e) {
+  		var $this = $(this);
+  		var $from = $this.attr('data-from');
+  		var choosed = $('#'+$from+' :checkbox:checked').size();
 
-function msgError(msg) {
-	$('#ajax_loading,#msg_error,#msg_success').hide();
-	$('#msg_error_content').html(msg);
-	$('#msg_error').slideDown();
+  		if (choosed<=0) {
+  			e.preventDefault();
+  			msgError('请先选择要处理的数据！');
+  		} else {
+  			if (confirm('确定吗？')) {
+	  			var $target = $this.attr('data-target');
+	  			var $action = $this.attr('data-action');
+	  			var choosed = [];
+	  			$('#'+$from+' :checkbox:checked').each(function () {
+	  				choosed.push($(this).val());
+	  			});
+
+				$.bcAjax({
+					'url': $action,
+					'type': 'post',
+					'data': {
+						'choosed': choosed
+					},
+					'history': 'false',
+					'success': function (result) {
+						switch ($target) {
+							case 'ajax':
+	  							msgSuccess('操作成功！');
+	  							$.bcAjax({
+	  								'url': LAST_HASH,
+	  								'history': 'false'
+	  							});
+								break;
+							case 'modal':
+								$(result).modal();
+								break;
+						}
+					}
+				});
+	  		}
+  		}
+
+  		return false;
+  	});
 };
 
 function gotoUrl(url) {

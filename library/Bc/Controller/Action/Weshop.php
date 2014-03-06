@@ -212,6 +212,20 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$this->view->Errormsg ('操作失败');
 		}
 	}
+
+	public function massdeleteAction() {
+		$this->auth('delete');
+
+		try {
+			$model = $this->M($this->mName);
+			$model->massDelete($_POST['choosed']);
+
+			$this->json(array());
+		} catch (Exception $e) {
+			Bc_Log::i()->error($e);
+			$this->view->Errormsg('操作失败');
+		}
+	}
 	
 	/**
 	 * 强制删除数据操作
@@ -248,6 +262,34 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		if ($this->restrictRole && $this->role!=$this->restrictRole) {
 			//$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('logout', 'login', 'default');
 		}
+	}
+	
+	protected function &_orgsArr() {
+		$cacher = &Bc_Cache_Remote::getInstance();
+		$ck = 'uorgs';
+		$arr = $cacher->get($ck);
+
+		if (!$arr) {
+			$arr = array(
+				'' => '* 请设置机构 *'
+				);
+			$dao = &Bc_Db::t('organization');
+			$rows = $dao->simpleAll();
+			$names = $this->config->auth->role->toArray();
+
+			foreach ($rows as $row) {
+				$k = '		----====	'.$names[$row['Type']].'	====----	';
+				if (!$arr[$k]) {
+					$arr[$k] = array();
+				}
+
+				$arr[$k][$row['id']] = $row['Name'];
+			}
+
+			$cacher->set($ck, $arr);
+		}
+
+		return $arr;
 	}
 	
 }
