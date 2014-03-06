@@ -246,7 +246,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 		parent::nLogin();
 
 		if ($this->restrictRole && $this->role!=$this->restrictRole) {
-			$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('logout', 'login', 'default');
+			//$this->_helper->getHelper('Redirector')->setCode(301)->setExit(true)->gotoSimple('logout', 'login', 'default');
 		}
 	}
 	
