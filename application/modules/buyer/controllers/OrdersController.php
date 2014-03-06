@@ -3,6 +3,7 @@
 class Buyer_OrdersController extends Bc_Controller_Action_Buyer {
 
 	public function init() {
+		$this->force_where = 'Uid='.$this->uid;
 		$this->mName = 'Orders';
 
 		parent::init();
@@ -13,5 +14,23 @@ class Buyer_OrdersController extends Bc_Controller_Action_Buyer {
 			);
 
 		$this->view->MName = $this->MName = '订单浏览';
+	}
+
+	public function indexAction() {
+		$keywords = trim(urldecode($this->getRequest()->getParam('Keywords', '')));
+		$searchKey = trim(urldecode($this->getRequest()->getParam('search_key', '')));
+
+		$tOrders = &Bc_Db::t('orders');
+		$data = $tOrders->search(array(
+			'pager' => $this->pager,
+			'keywords' => $keywords,
+			'key' => $searchKey,
+			'uid' => $this->uid
+			));
+
+		$this->view->pager = $this->pager;
+		$this->view->list = $data['rows'];
+		$this->view->pages = $data['pages'];
+		$this->view->count = $data['count'];
 	}
 }

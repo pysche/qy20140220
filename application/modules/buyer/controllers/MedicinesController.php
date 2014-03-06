@@ -18,7 +18,6 @@ class Buyer_MedicinesController extends Bc_Controller_Action_Buyer {
 	}
 
 	public function indexAction() {
-		$this->pager_init();
 		$keywords = trim(urldecode($this->getRequest()->getParam('Keywords', '')));
 		$searchKey = trim(urldecode($this->getRequest()->getParam('search_key', '')));
 

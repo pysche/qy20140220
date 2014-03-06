@@ -68,7 +68,7 @@
 				<td><?php echo $row['DosageForm'];?></td>
 				<td><?php echo $row['Spec'];?></td>
 				<td><?php echo $row['Unit'];?></td>
-				<td><?php echo $row['OriginPrice'];?></td>
+				<td><?php echo $row['ImportPrice'];?></td>
 				<td>
 				<?php 
 				if ((int)$row['IsBasic']>0) {
