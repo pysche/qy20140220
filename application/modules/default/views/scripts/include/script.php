@@ -10,6 +10,6 @@ var REQUEST_URI = '<?php echo $_SERVER['REQUEST_URI'];?>';
 <script type='text/javascript' src='<?php echo $this->url(array(
 	'controller' => 'config',
 	'action' => 'index',
-	'module' => $this->MODULE
+	'module' => 'default'
 ));?>'></script>
 <script src="js/qy.js" type="text/javascript" charset="utf-8"></script>      

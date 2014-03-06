@@ -100,7 +100,7 @@
 					'controller' => $this->cName,
 					'action' => 'tocart',
 					'id' => $row['id']
-				), null, true);?>' data-target='main_content' data-transport='ajax'>下单</a> 
+				), null, true);?>' data-target='cart_modal' data-transport='modal'>下单</a> 
 				</td>
 			</tr>
 			<?php
@@ -124,6 +124,23 @@
 			<?php echo $this->Pager($this->pager['page'], $this->count, $this->pager['limit']);?>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade std-modal" id='cart_modal' data-role='modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<div class='modal-header'>
+    		<h4>下单</h4>
+    	</div>
+      <div class="modal-body" id='cart_modal_body'>
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-danger" id='save_cart'>确定下单</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php Bc_Output::doOutput();?>

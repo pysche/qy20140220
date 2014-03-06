@@ -9,6 +9,27 @@ class Bc_Db_Table_Directories extends Bc_Db_Table {
 		return $db->query($sql);
 	}
 
+	public function &trans($medicineId) {
+		$rows = array();
+		$db = &$this->getAdapter();
+		$tOrg = &Bc_Db::t('organization');
+		$select = &$db->select();
+		$select->from($this->_name.' AS d');
+		$select->join($tOrg->getName().' AS o', 'o.id=d.org_id', array(
+			'o.Name'
+			));
+		$select->where('d.medicine_id=?', $medicineId);
+		$select->where('o.Deleted=?', 0);
+		$select->where('o.Type=?', 'trans');
+
+		$data = $db->fetchAll($select);
+		foreach ($data as $row) {
+			$rows[$row['org_id']] = $row['Name'];
+		}
+
+		return $rows;
+	}
+
 	public function &search(array $params) {
 		$result = array(
 			'rows' => array(),
@@ -22,6 +43,7 @@ class Bc_Db_Table_Directories extends Bc_Db_Table {
 		$Name = trim($params['name']);
 		$keywords = trim($params['keywords']);
 		$key = trim($params['key']);
+		$orgId = (int)$params['org_id'];
 	
 		$db = &$this->getAdapter();
 		$tMedicines = &Bc_Db::t('medicines');
@@ -35,6 +57,10 @@ class Bc_Db_Table_Directories extends Bc_Db_Table {
 		if (strlen($key) && strlen($keywords)) {
 			$where = trim($db->quoteInto('?', $key), "'").$db->quoteInto(' LIKE ?', '%'.$keywords.'%');
 			$select->where($where);
+		}
+
+		if ($orgId) {
+			$select->where('d.org_id=?', $orgId);
 		}
 	
 		$order = ' m.CreateTime DESC';

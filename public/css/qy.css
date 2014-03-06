@@ -159,7 +159,8 @@ ul.attach_list li:hover { cursor: hand; }
 #trans_medicines .modal-dialog,
 #seller_medicines .modal-dialog,
 #mwelcome .modal-dialog,
-.tmp-modal .modal-dialog {
+.tmp-modal .modal-dialog,
+.std-modal .modal-dialog {
 	width: 800px !important;
 }
 
