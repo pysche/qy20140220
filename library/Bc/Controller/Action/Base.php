@@ -36,6 +36,9 @@ class Bc_Controller_Action_Base extends Zend_Controller_Action {
 
 		$this->view->config = $this->config = Bc_Config::appConfig();
 		$this->view->CONFIG = $this->config->toArray();
+
+		$this->pager_init();
+		$this->view->pager = $this->pager;
 	}
 
 	protected function initSite() {

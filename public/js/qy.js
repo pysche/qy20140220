@@ -178,6 +178,31 @@ function Bc_bindEvents(dom) {
   	dom.find('form textarea[data-role="kindeditor"]').submit(function () {
   		KindEditor.sync('[data-role="kindeditor"]');
   	});
+
+  	dom.find('button[data-role="choose_all"]').click(function () {
+  		var $this = $(this);
+  		var target = $this.attr('data-target');
+  		$('form#'+target+' :checkbox:checked').trigger('click');
+  		$('form#'+target+' :checkbox').trigger('click');
+  		
+  		return false;
+  	});
+
+  	dom.find('button[data-role="unchoose_all"]').click(function () {
+  		var $this = $(this);
+  		var target = $this.attr('data-target');
+  		$('form#'+target+' :checkbox').attr('checked', false);
+  		
+  		return false;
+  	});
+
+  	dom.find('button[data-role="reverse_all"]').click(function () {
+  		var $this = $(this);
+  		var target = $this.attr('data-target');
+  		$('form#'+target+' :checkbox').trigger('click');
+  		
+  		return false;
+  	});
 };
 
 function msgSuccess(msg) {

@@ -45,14 +45,14 @@
           <a href="<?php echo $this->url(array(
           	'action' => 'modifypassword',
           	'controller' => 'self',
-          	'module' => $this->MODULE
+          	'module' => 'default'
           ));?>" data-target='main_content' data-transport='ajax'>修改密码</a>
         </li>
         <li>
           <a href="<?php echo $this->url(array(
           	'action' => 'logout',
           	'controller' => 'login',
-          	'module' => $this->MODULE
+          	'module' => 'default'
           ));?>">退出</a>
         </li>
       </ul>

@@ -28,6 +28,16 @@
 	  <div class="form-group">
 	    <input type="text" class="form-control" name='Keywords' id="keywords" placeholder="输入关键字" value='<?php echo $this->params['Keywords'];?>' />
 	  </div>
+	  <div class="form-group">
+	  	<label>每页显示数量</label>
+	  </div>
+	  <div class="form-group">
+	  	<?php 
+	  	echo $this->formSelect('limit', $this->pager['limit'], array(
+	  		'class' => 'form-control'
+	  		), $this->config->pager->pages->toArray());
+	  	?>
+	  </div>
 	  <div class='form-group'>
 	  	<button type="submit" class="btn btn-primary" data-role='search'>搜索</button>
 	  </div>
@@ -38,6 +48,7 @@
 	</form>
 	</div>
 	
+	<form id='medicines_list'>
 	<div class='table-responsive'>
 		<table class="table table-condensed table-hover">
 			<thead>
@@ -99,6 +110,9 @@
 				?>
 				</td>
 				<td>
+				<?php
+				echo $this->formCheckbox('choosed[]', $row['id']);
+				?>
 				<a class='label label-primary' href='<?php echo $this->url(array(
 					'action' => 'edit',
 					'id' => $row['id']
@@ -111,6 +125,18 @@
 			</tr>
 			<?php
 				}
+			?>
+			<tr class='success'>
+				<td colspan='20'>
+					<p class='text-center'>
+						<button type='button' class='btn btn-warning' data-role='reverse_all' data-target='medicines_list'>反选</button>
+						<button type='button' class='btn btn-success' data-role='choose_all' data-target='medicines_list'>全选</button>
+						<button type='button' class='btn btn-danger' data-role='unchoose_all' data-target='medicines_list'>全不选</button>
+
+					</p>
+				</td>
+			</tr>
+			<?php
 			} else {
 			?>
 			<tr>
@@ -130,6 +156,7 @@
 			<?php echo $this->Pager($this->currentPage, $this->totalCount, $this->numPerPage);?>
 		</div>
 	</div>
+</div>
 </div>
 
 <?php Bc_Output::doOutput();?>
