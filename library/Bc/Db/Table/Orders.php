@@ -11,6 +11,24 @@ class Bc_Db_Table_Orders extends Bc_Db_Table {
 			), $this->getAdapter()->quoteInto('id=?', $id).' AND '.$this->getAdapter()->quoteInto('Uid=?', $uid));
 	}
 
+	public function prepare($id, $transid) {
+		$config = &Bc_Config::appConfig();
+		$Status = $config->order->status->prepare;
+
+		return $this->update(array(
+			'Status' => $Status
+			), $this->getAdapter()->quoteInto('id=?', $id).' AND '.$this->getAdapter()->quoteInto('TransId=?', $transid));
+	}
+
+	public function sent($id, $transid) {
+		$config = &Bc_Config::appConfig();
+		$Status = $config->order->status->sent;
+
+		return $this->update(array(
+			'Status' => $Status
+			), $this->getAdapter()->quoteInto('id=?', $id).' AND '.$this->getAdapter()->quoteInto('TransId=?', $transid));
+	}
+
 	public function insert($params) {
 		$params['CreateTime'] = date('Y-m-d H:i:s');
 		$params['Deleted'] = 0;
@@ -93,9 +111,9 @@ class Bc_Db_Table_Orders extends Bc_Db_Table {
 		
 		if ($status) {
 			if (is_array($status)) {
-				$select->where('o.status IN (?)', $status);
+				$select->where('o.Status IN (?)', $status);
 			} else {
-				$select->where('o.status=?', $status);
+				$select->where('o.Status=?', $status);
 			}
 		}
 

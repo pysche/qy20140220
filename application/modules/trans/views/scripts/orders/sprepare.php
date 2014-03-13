@@ -5,7 +5,8 @@ $(function () {
 	$.bcAjax({
 		'url': '<?php echo $this->url(array(
 			'module' => $this->MODULE,
-			'controller' => $this->cName
+			'controller' => $this->cName,
+			'action' => 'pending'
 			), null, true);?>'
 	});	
 });
