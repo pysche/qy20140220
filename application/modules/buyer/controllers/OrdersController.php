@@ -37,6 +37,7 @@ class Buyer_OrdersController extends Bc_Controller_Action_Buyer {
 	public function showAction() {
 		$this->readAction();
 
+		$this->view->canCancel = $this->orderCanCancel($this->vo);
 		$this->view->medicine = Bc_Db::t('medicines')->id($this->vo->MedicineId);
 		$this->view->trans = Bc_Db::t('organization')->obyid($this->vo->TransId, 'trans');
 	}
@@ -44,6 +45,15 @@ class Buyer_OrdersController extends Bc_Controller_Action_Buyer {
 	public function cancelAction() {
 		$this->readAction();
 
-		$this->M($this->mName)->cancel($this->vo->id, $this->uid);
+		$ok = $this->M($this->mName)->cancel($this->vo->id, $this->uid);
+		if ($ok) {
+			Bc_Db::t('orderslog')->insert(array(
+				'OrderId' => $this->vo->id,
+				'CreateTime' => date('Y-m-d H:i:s'),
+				'Uid' => $this->uid,
+				'FromStatus' => $this->vo->Status,
+				'ToStatus' => $this->config->order->status->canceled
+				));
+		}
 	}
 }

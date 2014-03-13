@@ -81,11 +81,22 @@
 
 <script type='text/javascript'>
 $(function () {
+<?php
+if ($this->vo->Status && $this->canCancel) {
+?>
+	$('#morder a[data-role="cancel"]').show();
 	$('#morder a[data-role="cancel"]').attr('href', '<?php echo $this->url(array(
     	'module' => $this->MODULE,
     	'controller' => $this->cName,
     	'action' => 'cancel',
     	'id' => $this->vo->id
 		), null, true);?>');
+<?php
+} else {
+?>
+	$('#morder a[data-role="cancel"]').hide();
+<?php
+}
+?>
 });
 </script>
