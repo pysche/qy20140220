@@ -56,11 +56,30 @@
 			if (count($this->list)>0) {
 				$i = ($this->currentPage-1)*$this->numPerPage + 1;
 				foreach ($this->list as $row) {
+					$color = 'default';
+					switch ($row['Status']) {
+						case $this->config->order->status->canceled:
+							$color = 'danger';
+							break;
+						case $this->config->order->status->prepare:
+							$color = 'warning';
+							break;
+						case $this->config->order->status->sent:
+							$color = 'info';
+							break;
+						case $this->config->order->status->paid:
+							$color = 'primary';
+							break;
+					}
 			?>
 			<tr>
 				<td><?php echo $i++;?></td>
 				<td><?php echo $row['Code'];?></td>
-				<td><?php echo $row['Status'];?></td>
+				<td>
+					<div class='label label-<?php echo $color;?>'>
+					<?php echo $row['Status'];?>
+					</div>
+				</td>
 				<td><?php echo $row['MedicineName'];?></td>
 				<td><?php echo $row['Nums'];?></td>
 				<td><?php echo $row['Total'];?></td>
@@ -68,7 +87,12 @@
 				<td><?php echo $row['FinalTotal'];?></td>
 				<td><?php echo $row['TransName'];?></td>
 				<td>
-					<a href='<?php echo $this->url(array(), null ,true);?>' data-transport='ajax' class='btn btn-success'>查看</a>
+					<a href='<?php echo $this->url(array(
+						'module' => $this->MODULE,
+						'controller' => $this->cName,
+						'action' => 'show',
+						'id' => $row['id']
+					), null ,true);?>' data-transport='modal' data-target='morder' class='btn btn-success'>查看</a>
 				</td>
 			</tr>
 			<?php
@@ -92,6 +116,25 @@
 			<?php echo $this->Pager($this->pager['page'], $this->count, $this->pager['limit']);?>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id='morder' data-role='modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id='morder_body'>
+        <p>Loading ...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+        <a data-role='cancel' href="<?php echo $this->url(array(
+        	'module' => $this->MODULE,
+        	'controller' => $this->cName,
+        	'action' => 'cancel',
+        	'id' => $id
+        ), null, true);?>" data-transport='ajax' data-format='script' onclick="return confirm('确定？')" class="btn btn-danger">取消订单</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php Bc_Output::doOutput();?>

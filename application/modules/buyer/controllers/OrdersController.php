@@ -3,12 +3,12 @@
 class Buyer_OrdersController extends Bc_Controller_Action_Buyer {
 
 	public function init() {
-		$this->force_where = 'Uid='.$this->uid;
 		$this->mName = 'Orders';
 
 		parent::init();
 		$this->nLogin();
 
+		$this->force_where = 'Uid='.$this->uid;
 		$this->view->searchKeys = $this->searchKeys = array(
 			'Code' => '订单号',
 			);
@@ -32,5 +32,18 @@ class Buyer_OrdersController extends Bc_Controller_Action_Buyer {
 		$this->view->list = $data['rows'];
 		$this->view->pages = $data['pages'];
 		$this->view->count = $data['count'];
+	}
+
+	public function showAction() {
+		$this->readAction();
+
+		$this->view->medicine = Bc_Db::t('medicines')->id($this->vo->MedicineId);
+		$this->view->trans = Bc_Db::t('organization')->obyid($this->vo->TransId, 'trans');
+	}
+
+	public function cancelAction() {
+		$this->readAction();
+
+		$this->M($this->mName)->cancel($this->vo->id, $this->uid);
 	}
 }

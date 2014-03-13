@@ -2,6 +2,17 @@
 
 class Bc_Db_Table_Organization extends Bc_Db_Table {
 	
+	public function obyid($id, $type) {
+		$db = &$this->getAdapter();
+		$select = &$db->select();
+		$select->from($this->_name);
+		$select->where('id=?', $id);
+		$select->where('Type=?', $type);
+		$select->limitPage(1, 1);
+
+		return $db->fetchRow($select);
+	}
+
 	public function &buyer($name) {
 		$db = &$this->getAdapter();
 		$select = &$db->select();

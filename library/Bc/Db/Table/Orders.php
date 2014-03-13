@@ -1,6 +1,16 @@
 <?php
 
 class Bc_Db_Table_Orders extends Bc_Db_Table {
+
+	public function cancel($id, $uid) {
+		$config = &Bc_Config::appConfig();
+		$Status = $config->order->status->canceled;
+
+		return $this->update(array(
+			'Status' => $Status
+			), $this->getAdapter()->quoteInto('id=?', $id).' AND '.$this->getAdapter()->quoteInto('Uid=?', $uid));
+	}
+
 	public function insert($params) {
 		$params['CreateTime'] = date('Y-m-d H:i:s');
 		$params['Deleted'] = 0;

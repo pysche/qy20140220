@@ -116,7 +116,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 	 */
 	public function readAction() {
 		$this->editAction('list');
-		
+
 		$model = &$this->M($this->mName);
 		$this->view->vo = $this->vo = $model->fetchRow('id=' . (int)$this->getRequest()->getParam('id').($this->force_where ? ' AND '.$this->force_where : ''));
 	}
