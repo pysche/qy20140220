@@ -1,6 +1,6 @@
 <?php
 
-class OrdersController extends Bc_Controller_Action_Weshop {
+class Manage_OrdersController extends Bc_Controller_Action_Manage {
 	
 	public function init() {
 		parent::init();

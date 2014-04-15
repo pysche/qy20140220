@@ -18,6 +18,7 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 	protected $MName = '';
 	protected $actor = '';
 	protected $role = '';
+	protected $_org = array();
 	protected $restrictRole = 'admin';
 
 	public function init() {
@@ -31,6 +32,10 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 				$this->actor = $this->user['Realname'];
 				
 				$this->role = $this->user['Role'];
+
+				if ($user['OrgId']) {
+					$this->_org = $this->M('organization')->id($user['OrgId']);
+				}
 			}
 		}
 		
@@ -277,11 +282,15 @@ class Bc_Controller_Action_Weshop extends Bc_Controller_Action_Base {
 			$rows = $dao->simpleAll();
 			$names = $this->config->auth->role->toArray();
 
-			foreach ($rows as $row) {
-				$k = '		----====	'.$names[$row['Type']].'	====----	';
-				if (!$arr[$k]) {
-					$arr[$k] = array();
+			foreach ($names as $k=>$v) {
+				if ($k!='default') {
+					$arr['		'.str_repeat('-', 10).str_repeat('=', 10).'	'.$v.'	'.str_repeat('=', 10).str_repeat('-', 10).'----	'] = array();
 				}
+			}
+			ksort($arr);
+
+			foreach ($rows as $row) {
+				$k = '		'.str_repeat('-', 10).str_repeat('=', 10).'	'.$names[$row['Type']].'	'.str_repeat('=', 10).str_repeat('-', 10).'----	';
 
 				$arr[$k][$row['id']] = $row['Name'];
 			}

@@ -113,7 +113,8 @@ class Trans_OrdersController extends Bc_Controller_Action_Trans {
 				'CreateTime' => date('Y-m-d H:i:s'),
 				'Uid' => $this->uid,
 				'FromStatus' => $this->vo->Status,
-				'ToStatus' => $this->config->order->status->canceled
+				'ToStatus' => $this->config->order->status->canceled,
+				'OrgName' => $this->_org['Name']
 				));
 		}
 	}
@@ -128,7 +129,8 @@ class Trans_OrdersController extends Bc_Controller_Action_Trans {
 				'CreateTime' => date('Y-m-d H:i:s'),
 				'Uid' => $this->uid,
 				'FromStatus' => $this->vo->Status,
-				'ToStatus' => $this->config->order->status->canceled
+				'ToStatus' => $this->config->order->status->canceled,
+				'OrgName' => $this->_org['Name']
 				));
 		}
 	}

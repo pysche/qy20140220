@@ -46,7 +46,7 @@
 					<th>总价</th>
 					<th>实际到货数</th>
 					<th>实际总价</th>
-					<th>配送商</th>
+					<th>买方</th>
 					<th width='100'>操作</th>
 				</tr>
 			</thead>
@@ -85,7 +85,7 @@
 				<td><?php echo $row['Total'];?></td>
 				<td><?php echo $row['FinalNums'];?></td>
 				<td><?php echo $row['FinalTotal'];?></td>
-				<td><?php echo $row['TransName'];?></td>
+				<td><?php echo $row['BuyerName'];?></td>
 				<td>
 					<a href='<?php echo $this->url(array(
 						'module' => $this->MODULE,
